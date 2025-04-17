@@ -60,6 +60,9 @@ const EditProfile = ({ user }) => {
       if (res) {
         setSkillData(() => res.data.data);
       }
+      // if (skills) {
+      //   console.log(skills);
+      // }
     } catch (err) {
       console.error(err);
     }
