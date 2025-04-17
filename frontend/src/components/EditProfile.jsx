@@ -1,16 +1,15 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
-import addUser from "../utils/userSlice";
+import {addUser} from "../utils/userSlice";
 import EditProfileCard from "./EditProfileCard";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditProfile = ({ user }) => {
   const dispatch = useDispatch();
-  setInterval(() => {
-    setToast(false);
-  }, 3000);
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -18,10 +17,11 @@ const EditProfile = ({ user }) => {
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
-  const [skills, setSkills] = useState(user.skills || []);
   const [error, setError] = useState("");
-  const [toast, setToast] = useState(false);
+  const [skills, setSkills] = useState(user.skills || []);
+  const [skillData, setSkillData] = useState([]);
 
+  // save profile
   const saveProfile = async () => {
     try {
       setError("");
@@ -39,7 +39,7 @@ const EditProfile = ({ user }) => {
         { withCredentials: true }
       );
 
-      setToast(true);
+      toast.success("Profile updated successfully");
       dispatch(addUser(res?.data?.data));
     } catch (err) {
       if (err.response && err.response.data) {
@@ -50,15 +50,30 @@ const EditProfile = ({ user }) => {
     }
   };
 
+  // get skills
+  const getSkills = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/profile/skills", {
+        withCredentials: true,
+      });
+
+      if (res) {
+        setSkillData(() => res.data.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    const cookie = document.cookie;
+    if (cookie) {
+      getSkills();
+    }
+  }, []);
+
   return (
     <>
-      {toast && (
-        <div className="toast toast-top toast-center">
-          <div className="alert alert-success">
-            <span>Profile Updated successfully.</span>
-          </div>
-        </div>
-      )}
       <div className="flex justify-center items-center mx-10 flex-wrap">
         <div className="flex justify-center items-center m-5">
           <div className="bg-white p-6 rounded-2xl shadow-xl w-86">
@@ -123,17 +138,41 @@ const EditProfile = ({ user }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
-                  skills
+                <label
+                  htmlFor="skills"
+                  className="block text-sm text-gray-700 font-medium"
+                >
+                  Skill
                 </label>
-                <input
+                <select
+                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  id="skills"
+                  name="skills"
+                  onChange={(e) => setSkills((prev)=>[...prev, e.target.value])}
+                >
+                  <option className="w-full px-4 py-1 mt-1 border rounded-lg " value="">
+                    Select Skill
+                  </option>
+                  {skillData.map((skill, index) => {
+                    return (
+                      <option
+                        className="w-full px-4 py-1 mt-1 border rounded-lg"
+                        key={index}
+                        value={skill}
+                      >
+                        {skill}
+                      </option>
+                    );
+                  })}
+                </select>
+                {/* <input
                   type="text"
-                  value={skills.join(", ")}
+                  value={skills.map((skill)=>skill)}
                   className="w-full px-4 py-1 mt-1 border rounded-lg"
                   onChange={(e) => {
                     setSkills([e.target.value]);
                   }}
-                />
+                /> */}
               </div>
 
               <div className="mb-2">

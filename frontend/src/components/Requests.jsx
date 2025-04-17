@@ -13,7 +13,7 @@ const Requests = () => {
     // accept or reject req
     const reviewRequest =  async (status,_id) => {
         try{
-            console.log(status+_id)
+            // console.log(status+_id)
             const res = await axios.post(BASE_URL+"/request/review/"+status+"/"+_id, {}, {withCredentials:true});
             dispatch(removeRequest(_id));
         }catch(err){
@@ -21,7 +21,6 @@ const Requests = () => {
         }
     }
 
-    
     // fetch all requests
     const fetchRequests = async () => {
         try{

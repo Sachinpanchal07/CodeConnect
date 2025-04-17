@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const EditProfileCard = ({ user }) => {
   const { firstName, lastName, photoUrl, age, gender, about, skills } = user;
+  const data = useSelector((store)=>store.user);
+  const allSkills = data.skills;
 
   return (
     <div className="flex justify-center m-6">
@@ -22,7 +25,7 @@ const EditProfileCard = ({ user }) => {
           )}
           {skills?.length > 0 && (
             <p className="text-gray-600 text-sm mb-1">
-              skills: {skills.join(" | ")}
+              skills: {allSkills.join(" | ")}
             </p>
           )}
           <p className="text-gray-600 text-sm mb-4 leading-relaxed">{about}</p>

@@ -46,8 +46,8 @@ const ConnectionCard = ({ connection }) => {
         className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white shadow-md"
       />
       <h2 className="text-2xl font-bold text-gray-800 mb-2">{firstName} {lastName}</h2>
-      <p className="text-gray-600 text-sm mb-1">🎂 Age: {age}</p>
-      <p className="text-gray-600 text-sm mb-1">🚻 Gender: {gender}</p>
+      <p className="text-gray-600 text-sm mb-1">Age: {age}</p>
+      <p className="text-gray-600 text-sm mb-1">Gender: {gender}</p>
       { skills?.length > 0 && (<p className="text-gray-600 text-sm mb-1">skills: {skills.join(" | ")}</p>)}
       <p className="text-gray-700 text-center text-sm mt-2 italic">{about}</p>
       <button className=" text-white bg-blue-500 hover:bg-blue-600 px-4 py-1 m-2 rounded" onClick={handleRemoveConnection}>Remove</button>

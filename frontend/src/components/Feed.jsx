@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import axios from "axios";
 import UserCard from "./UserCard";
+import {useNavigate} from "react-router-dom";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cookie = document.cookie;
 
   const getFeed = async () => {
     try {
@@ -25,7 +28,12 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    getFeed();
+    if(cookie){
+      getFeed()
+      return;
+    };
+    navigate("/login");
+   
   }, []);
 
   if(!feed) return

@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Body></Body>}>
             <Route path="/" element={<Feed></Feed>}></Route>
-            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route> 
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/connections" element={<Connections></Connections>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route>

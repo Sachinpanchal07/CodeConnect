@@ -31,7 +31,7 @@ const Body = () => {
       const res = await axios.get(BASE_URL + "/request/all", {withCredentials:true});
       dispatch(addInAllRequests(res?.data?.data));
     }catch(err){
-      // console.error(err);
+      console.error(err);
     }
 
   }

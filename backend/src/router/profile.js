@@ -3,6 +3,7 @@ const profileRouter = express.Router();
 const {userAuth} = require("../middlewares/auth.js")
 const User = require("../models/user.js");
 const {validateEditProfileData} = require("../utils/validation.js");
+const {Skills} = require("../utils/skills.js");
 
 
 // view profile
@@ -12,7 +13,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res)=>{
      if(!user){
         throw new Error("user not found");
       }
-      res.send(user);
+      res.send(user); 
     }catch(err){
       res.status(500).send("ERROR "+ err.message);
     }
@@ -35,6 +36,21 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res)=>{
 
   }catch(err){
     res.status(500).send("ERRRO: " + err.message);
+  }
+});
+
+// get Skills 
+profileRouter.get("/profile/skills", userAuth, async (req, res) => {
+  try{
+    // console.log(Skills);
+    if(Skills){
+      res.json({"data":Skills});
+    }
+    else{
+      res.json({"message":"Data not found"})
+    }
+  }catch(err){
+    res.json({"ERROR: ":"something went wrong"});
   }
 })
 

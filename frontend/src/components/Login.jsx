@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
@@ -49,6 +50,14 @@ const Login = () => {
       setError(err?.response?.data || "something went wrong");
     }
   };
+
+  // handle if user already logged in
+  useEffect(()=>{
+    const cookie = document.cookie;
+    if(cookie){
+      navigate("/");
+    }
+  })
 
   return (
     <div className="flex justify-center items-center mt-15">
