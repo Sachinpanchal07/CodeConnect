@@ -91,7 +91,7 @@ userRouter.get("/feed", userAuth, async (req, res)=>{
     }
 });
 
-// search users
+// search users by
 
 userRouter.post("/user/search", userAuth, async (req, res) => {
     try{
