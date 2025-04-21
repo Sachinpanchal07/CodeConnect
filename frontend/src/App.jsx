@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/requests";
 import { ToastContainer } from 'react-toastify';
+import SearchUsers from "./components/SearchUsers";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/connections" element={<Connections></Connections>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route>
+            <Route path="/Search" element={<SearchUsers></SearchUsers>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>  
