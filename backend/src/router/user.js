@@ -95,9 +95,11 @@ userRouter.get("/feed", userAuth, async (req, res)=>{
 
 userRouter.post("/user/search", userAuth, async (req, res) => {
     try{
-        const {skill} = req.body;
-        if(skill){
-            const users = await User.find({skills:skill});
+        const {searchedSkill} = req.body;
+        // console.log(req.body);
+        if(searchedSkill){
+            const users = await User.find({skills:searchedSkill});
+            console.log(users);
             return res.json({"data":users});
         }
         res.send("No Match Found");

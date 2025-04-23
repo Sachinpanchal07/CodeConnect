@@ -23,6 +23,7 @@ const UserCard = ({ user }) => {
   };
 
   return (
+
     <div className="flex justify-center m-6">
       <div className="w-80 bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
         <figure className="rounded-t-xl overflow-hidden">
