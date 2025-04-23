@@ -3,6 +3,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
+import {toast} from "react-toastify";
 
 const UserCard = ({ user }) => {
   const { _id, firstName, lastName, photoUrl, age, gender, about, skills } = user;
@@ -19,6 +20,7 @@ const UserCard = ({ user }) => {
       dispatch(removeUserFromFeed(userId));
     } catch (err) {
       console.error(err);
+      toast.error("Something went wrong");
     }
   };
 

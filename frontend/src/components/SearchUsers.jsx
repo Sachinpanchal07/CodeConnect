@@ -14,15 +14,23 @@ const SearchUsers = () => {
   const getUsers = async () => {
     try{
       const cookie = document.cookie;
-      if(cookie){
+      if(cookie){ // check cookie
+
         if(searchedSkill == ""){
           toast.error("Please enter valid skill")
            return
           };
-        const res = await axios.post(BASE_URL+"/user/search",{searchedSkill}, {withCredentials:true});
+        const res = await axios.post(BASE_URL+"/user/search", {searchedSkill}, {withCredentials:true});
         const data = res.data.data;
-        setUsers([...data]);
-        setsearchedSkill("")
+
+        if(data.length  > 0){
+          setUsers([...data]);
+          setsearchedSkill("");
+        }else{
+          toast.error("Match not found");
+          setsearchedSkill("");
+          return;
+        }
       }
       else{
         navigate("/login");
@@ -32,7 +40,6 @@ const SearchUsers = () => {
       toast.error("Something went wrong");
     }
   };
-  // console.log(searchedSkill);
 
   return (
     <div className="flex flex-col px-4 items-center">
@@ -51,10 +58,10 @@ const SearchUsers = () => {
       </div>
 
       <div className="flex justify-evenly flex-wrap">
-        {
+        { 
           users.map((user, index)=> (
             <UserCard key={index} user={user}></UserCard>
-          ))
+          )) 
         }
       </div>
     </div>

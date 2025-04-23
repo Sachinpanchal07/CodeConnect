@@ -41,7 +41,7 @@ const Requests = () => {
     }
 
   return (
-    <div className='flex'>
+    <div className='flex flex-wrap justify-evenly flex-start'>
       {
         requests.map((request,index)=>{
             return (

@@ -98,7 +98,10 @@ userRouter.post("/user/search", userAuth, async (req, res) => {
         const {searchedSkill} = req.body;
         // console.log(req.body);
         if(searchedSkill){
-            const users = await User.find({skills:searchedSkill});
+            const users = await User.find({
+                skills:{ $regex: searchedSkill, $options: "i" },
+                status: { $nin : ["interested", "ignored", "accepted", "rejected"]}
+            });
             console.log(users);
             return res.json({"data":users});
         }

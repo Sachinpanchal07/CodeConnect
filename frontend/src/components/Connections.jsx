@@ -34,7 +34,7 @@ const Connections = () => {
   }
 
   return (
-    <div className="flex flex-wrap ">
+    <div className="flex flex-wrap justify-center">
       {
         connections.map((connection,index)=>(
           <ConnectionCard key={index} connection={connection}></ConnectionCard>
