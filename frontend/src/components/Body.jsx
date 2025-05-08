@@ -44,10 +44,12 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
-        <NavBar></NavBar>
+    <div clasName='flex flex-col min-h-screen'>
+      <NavBar clasName='fixed top-0 left-0 right-0 z-50'></NavBar>
+      <main className='flex-grow overflow-auto'>
         <Outlet></Outlet>
-        <Footer></Footer>
+      </main>
+      <Footer clasName='fixed top-0 left-0 right-0 z-50'></Footer>
     </div>
   )
 }

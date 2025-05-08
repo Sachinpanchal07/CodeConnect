@@ -20,6 +20,7 @@ const SearchUsers = () => {
           toast.error("Please enter valid skill")
            return
           };
+          // calling api and get the user data
         const res = await axios.post(BASE_URL+"/user/search", {searchedSkill}, {withCredentials:true});
         const data = res.data.data;
 
@@ -60,7 +61,7 @@ const SearchUsers = () => {
       <div className="flex justify-evenly flex-wrap">
         { 
           users.map((user, index)=> (
-            <UserCard key={index} user={user}></UserCard>
+            <UserCard key={index} user={user}></UserCard> // rendering user card.
           )) 
         }
       </div>

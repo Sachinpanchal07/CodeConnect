@@ -124,7 +124,7 @@ const Login = () => {
 
           <p className="text-red m-5">{error}</p>
           <button
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+            className="cursor-pointer w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
             type="button"
             onClick={isLoginForm ? handleLogin : handleSignup}
           >
