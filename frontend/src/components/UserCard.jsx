@@ -27,7 +27,7 @@ const UserCard = ({ user }) => {
   return (
 <div className="flex justify-center m-6">
   <div className="w-80 bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-200 rounded-xl shadow-xl shadow-orange-500/50 hover:shadow-orange-500/30 transition-shadow duration-300">
-    {/* Image */}
+    {/* Imaeg */}
     <figure className="rounded-t-xl overflow-hidden">
       <img
         src={photoUrl}
