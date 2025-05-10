@@ -60,16 +60,16 @@ const Login = () => {
   })
 
   return (
-    <div className="flex justify-center items-center mt-15">
-      <div className="bg-white p-6 rounded-2xl shadow-xl w-96">
-        <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
+    <div className="flex justify-center items-center m-5 dark:text-neutral-300">
+      <div className="dark:bg-neutral-600  p-6 rounded-2xl shadow-xl w-96">
+        <h2 className="text-2xl font-bold  text-center mb-4">
           {isLoginForm ? "Login" : "Sign UP"}
         </h2>
         <form>
           {!isLoginForm && (
             <>
               <div className="mb-4">
-                <label className="block text-gray-700 font-medium">
+                <label className="block  font-medium">
                   First Name
                 </label>
                 <input
@@ -83,7 +83,7 @@ const Login = () => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-700 font-medium">
+                <label className="block  font-medium">
                   Last Name
                 </label>
                 <input
@@ -99,7 +99,7 @@ const Login = () => {
           )}
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Email</label>
+            <label className="block  font-medium">Email</label>
             <input
               type="email"
               value={emailId}
@@ -111,7 +111,7 @@ const Login = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Password</label>
+            <label className="block  font-medium">Password</label>
             <input
               type="password"
               value={password}
@@ -132,12 +132,12 @@ const Login = () => {
           </button>
 
           <p
-            className="cursor-pointer mt-2 flex justify-center"
+            className="cursor-pointer mt-2 flex justify-center "
             onClick={() => setIsLoginForm((value) => !value)}
           >
             {isLoginForm
-              ? "New User? SignUp here"
-              : "Existing User? Login Here"}
+              ? <p>New User? <span className="text-blue-600 underline">SignUp here</span></p>
+              : <p>Existing User? <span className="text-blue-600 underline">Login Here</span></p>}
           </p>
         </form>
       </div>
