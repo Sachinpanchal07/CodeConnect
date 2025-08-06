@@ -37,18 +37,18 @@ const UserCard = ({ user }) => {
     </figure>
 
     {/* Content */}
-    <div className="p-5">
+    <div className="p-5 ">
       <h2 className="text-2xl font-semibold mb-1">
         {firstName + " " + lastName}
       </h2>
 
       {age && gender && (
-        <p className="text-sm  mb-1">{`${age}, ${gender}`}</p>
+        <p className="text-sm font-bold  mb-1">{`${age}, ${gender}`}</p>
       )}
 
       {skills?.length > 0 && (
-        <p className="text-sm  mb-2">
-          Skills: <span className="font-medium">{skills.join(" | ")}</span>
+        <p className="text-sm font-bold mb-2">
+          Skills: <span className="font-medium ">{skills.join(" | ")}</span>
         </p>
       )}
 

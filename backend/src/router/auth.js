@@ -8,7 +8,7 @@ const User = require("../models/user.js");
 authRouter.post("/signup", async (req, res) => {
     try{
       const{firstName, lastName, emailId, password} = req.body;
-      validateSignupData(req); // when user makes the req then this fun will be called 
+      validateSignupData(req); // when user makes the req then this func will be called 
       const newPass = await bcrypt.hash(password, 10);
       const userInstance = new User({
         firstName,

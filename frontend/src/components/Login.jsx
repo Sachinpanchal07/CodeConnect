@@ -28,10 +28,12 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data));
+      console.log('backend response')
+      console.log(res);
       return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "something went wrong");
-      // console.error(err);
+      console.error(err);
     }
   };
 
