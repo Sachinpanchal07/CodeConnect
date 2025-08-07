@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      validate(value){
+      validate(value){ // custom validator functions
         if(!validator.isEmail(value)){
           throw new Error("invalid email address " + value);
         }
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema(
         if(!validator.isStrongPassword(value)){
           throw new Error("enter a strong password");
         }
-      }
+      } 
     },
     age: {
       type: Number,
