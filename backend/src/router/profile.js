@@ -10,13 +10,17 @@ const {Skills} = require("../utils/skills.js");
 profileRouter.get("/profile/view", userAuth, async (req, res)=>{
     try{
       const user = req.user;
+      // console.log(req);
+      // console.log("===========================================")
+      // console.log(user);
      if(!user){
         throw new Error("user not found");
       }
+      // console.log(user)
       res.send(user); 
     }catch(err){
       res.status(500).send("ERROR "+ err.message);
-    }
+    }  
 });
 
 // edit profile
@@ -25,7 +29,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res)=>{
     const loggedInUser = req.user;
     const isEditAllowed = validateEditProfileData(req); 
     if(!isEditAllowed){
-      throw new Error("edit not allowed");
+      throw new Error("edit not allowed !!");
     }
     Object.keys(req.body).forEach((key)=>loggedInUser[key] = req.body[key]);
     await loggedInUser.save();
