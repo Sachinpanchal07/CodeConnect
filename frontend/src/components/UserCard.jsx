@@ -20,7 +20,7 @@ const UserCard = ({ user }) => {
 
       dispatch(removeUserFromFeed(userId));
       dispatch(removeSearchUser(userId));
-      if(status == "interested") toast.success("Request sent");
+      if(status == "interested") toast.success("Request sent")
       
     } catch (err) {
       console.error(err.message);
