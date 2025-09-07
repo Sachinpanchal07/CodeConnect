@@ -4,6 +4,7 @@ import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRequests , removeRequest} from '../utils/requestsSlice'
 import RequestCard from './RequestCard'
+import {toast} from 'react-toastify';
 
 const Requests = () => {
 
@@ -16,6 +17,8 @@ const Requests = () => {
             // console.log(status+_id)
             const res = await axios.post(BASE_URL+"/request/review/"+status+"/"+_id, {}, {withCredentials:true});
             dispatch(removeRequest(_id));
+            toast.success("Connection request " + status + " successfully");
+
         }catch(err){
             console.error(err);
         }

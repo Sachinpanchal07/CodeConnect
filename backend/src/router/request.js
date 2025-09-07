@@ -45,7 +45,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
             data
         })
     }catch(err){
-        res.status(400).send("ERROR : " + err.message);
+        res.status(400).json({message : err.message});
     }
 })
 
@@ -79,11 +79,11 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, r
             data
         })
     }catch(err){
-        res.status(400).send("ERROR : " + err.message);
+        res.status(400).json({message : err.message});
     }
 })
 
-// delete connection req or remove connection. 
+//  remove connection. 
 
 requestRouter.delete("/request/remove/:id", userAuth, async (req, res) => {
     try{
@@ -99,7 +99,7 @@ requestRouter.delete("/request/remove/:id", userAuth, async (req, res) => {
         await ConnectionRequest.findByIdAndDelete(id);
         res.send("Connection Removed Successfully");
     }catch(err){
-        console.error(err);
+        res.status(400).json({message : err.message});
     }
 });
 

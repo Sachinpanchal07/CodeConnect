@@ -4,12 +4,16 @@ import { BASE_URL } from "../utils/constants";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import UserCard from "./UserCard";
+import { addSearchUser } from "../utils/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchUsers = () => {
 
   const [searchedSkill, setsearchedSkill] = useState("");
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const users = useSelector((store => store.searchUser))
 
   const getUsers = async () => {
     try{
@@ -22,15 +26,15 @@ const SearchUsers = () => {
           };
           // calling api and get the user data
         const res = await axios.post(BASE_URL+"/user/search", {searchedSkill}, {withCredentials:true});
-        const data = res.data.data;
+        const data = res?.data?.data;
 
-        if(data.length  > 0){
-          setUsers([...data]);
-          setsearchedSkill("");
-        }else{
+        if(data.length  >= 0){
+          dispatch(addSearchUser(data));
+          // setUsers([...data]);
+          // setsearchedSkill("");
+        }
+        if (data.length == 0){
           toast.error("Match not found");
-          setsearchedSkill("");
-          return;
         }
       }
       else{

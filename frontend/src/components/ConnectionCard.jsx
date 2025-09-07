@@ -4,10 +4,11 @@ import {BASE_URL} from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { removeFromRequests } from "../utils/allRequestsSlice";
+import { removeConnections } from "../utils/connectionSlice";
 
 const ConnectionCard = ({ connection }) => {
   const loggedInUser = useSelector((store)=>store.user);
-  const allRequests = useSelector((store)=>store.allRequestsSlice);
+  const allRequests = useSelector((store)=>store.allRequestsSlice); 
   const dispatch = useDispatch();
 
   if (!connection) return null;
@@ -16,7 +17,7 @@ const ConnectionCard = ({ connection }) => {
   const handleRemoveConnection = async () => {
     try{
       const isConfirm = confirm("Are you sure to remove connection");
-      console.log("before removed" + allRequests)
+      // console.log("before removed", allRequests)
       if(isConfirm){
         const reqIdArray = allRequests.filter(
           (req) =>
@@ -27,7 +28,8 @@ const ConnectionCard = ({ connection }) => {
         await axios.delete(BASE_URL+"/request/remove/"+reqId, {withCredentials:true});
 
         dispatch(removeFromRequests(reqId));
-        console.log("after removed" + allRequests)
+        dispatch(removeConnections(_id));
+        // console.log("after removed" + allRequests);
         toast.success("Connection Removed Successfully");
       }else{
         console.log("command revoked")
@@ -50,7 +52,7 @@ const ConnectionCard = ({ connection }) => {
       <p className="text-gray-600 text-sm mb-1">Gender: {gender}</p>
       { skills?.length > 0 && (<p className="text-gray-600 text-sm mb-1">skills: {skills.join(" | ")}</p>)}
       <p className="text-gray-700 text-center text-sm mt-2 italic">{about}</p>
-      <button className=" text-white bg-blue-500 hover:bg-blue-600 px-4 py-1 m-2 rounded" onClick={handleRemoveConnection}>Remove</button>
+      <button className=" text-white bg-blue-500 hover:bg-blue-600 px-4 py-1 m-2 rounded" onClick={handleRemoveConnection}>Disconnect</button>
     </div>
   );
 };

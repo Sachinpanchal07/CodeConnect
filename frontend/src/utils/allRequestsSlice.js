@@ -8,7 +8,7 @@ const allRequestsSlice = createSlice({
         
         removeFromRequests:(state, action) => {
             const newArray = state.filter((request) => {
-                console.log(typeof(request._id) + "  " + typeof(action.payload));
+                // console.log(typeof(request._id) + "  " + typeof(action.payload));
                 return request._id != action.payload
             });
             return newArray;

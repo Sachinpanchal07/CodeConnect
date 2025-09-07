@@ -6,7 +6,7 @@ const User = require("../models/user");
 
 const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills";
 
-// req received
+// connection req received 
 userRouter.get("/user/requests/received", userAuth, async (req, res)=>{
     try{
         const loggedInUser = req.user;
@@ -59,7 +59,7 @@ userRouter.get("/feed", userAuth, async (req, res)=>{
         const loggedInUser = req.user;
         const page = parseInt(req.query.page) || 1;
         let limit = parseInt(req.query.limit) || 10;
-        limit = limit>50 ? 50 : limit;
+        limit = limit > 50 ? 50 : limit;
         const skip = (page-1)*limit; // formula made for skipping.
 
         // fetch all user except , (himself and he sent or received req to other user) 
@@ -87,29 +87,55 @@ userRouter.get("/feed", userAuth, async (req, res)=>{
         res.json({ data: users });  
 
     }catch(err){
-        res.status(400).send("ERROR : " + err.message);
+        res.status(400).json({ message:"Internal Server Error" });
     }
 });
 
-// search users by
+// searching
 
 userRouter.post("/user/search", userAuth, async (req, res) => {
-    try{
-        const {searchedSkill} = req.body;
-        // console.log(req.body);
-        if(searchedSkill){
-            const users = await User.find({
-                skills:{ $regex: searchedSkill, $options: "i" },
-                status: { $nin : ["interested", "ignored", "accepted", "rejected"]}
-            });
-            console.log(users);
-            return res.json({"data":users});
-        }
-        res.send("No Match Found");
-    }catch(err){
-        console.error(err)
+  try {
+    const { searchedSkill } = req.body;
+    const loggedInUser = req.user;
+
+    if (!searchedSkill) {
+      return res.status(400).send("No Match Found");
     }
+
+    // Step 1: Get all users with searchedSkill
+    const users = await User.find({
+      skills: { $regex: searchedSkill, $options: "i" },
+      _id: { $ne: loggedInUser._id } // exclude self
+    });
+
+    // Step 2: Get all connection requests involving the loggedInUser
+    const existingRequests = await ConnectionRequest.find({
+      $or: [
+        { fromUserId: loggedInUser._id },
+        { toUserId: loggedInUser._id }
+      ]
+    });
+
+    // Step 3: Build a set of userIds already connected/requested
+    const excludedUserIds = new Set();
+    for (let req of existingRequests) {
+      excludedUserIds.add(req.fromUserId.toString());
+      excludedUserIds.add(req.toUserId.toString());
+    }
+
+    // Step 4: Filter out users who are already in requests
+    const filteredUsers = users.filter(
+      user => !excludedUserIds.has(user._id.toString())
+    );
+
+    return res.json({ data: filteredUsers });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
+
 
 
 module.exports = userRouter;

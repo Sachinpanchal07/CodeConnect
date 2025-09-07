@@ -12,7 +12,7 @@ const EditProfileCard = ({ user }) => {
         <figure className="rounded-t-xl overflow-hidden">
           <img
             src={photoUrl}
-            alt="photo"
+            alt="profile photo"
             className="w-full h-60 object-cover"
           />
         </figure>

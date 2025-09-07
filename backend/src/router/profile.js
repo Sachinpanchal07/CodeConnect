@@ -32,10 +32,11 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res)=>{
       throw new Error("edit not allowed !!");
     }
     Object.keys(req.body).forEach((key)=>loggedInUser[key] = req.body[key]);
+    
     await loggedInUser.save();
     res.json({
       message:`${loggedInUser.firstName} ,your profile edited successfully`,
-      data:loggedInUser,
+      data:loggedInUser
     });
 
   }catch(err){

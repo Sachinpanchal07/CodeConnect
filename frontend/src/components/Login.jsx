@@ -28,12 +28,11 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data));
-      console.log('backend response')
-      console.log(res);
+      // console.log(res);
       return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "something went wrong");
-      console.error(err);
+      // console.error(err);
     }
   };
 
@@ -64,10 +63,12 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center m-5 dark:text-neutral-300">
       <div className="dark:bg-neutral-600  p-6 rounded-2xl shadow-xl w-96">
-        <h2 className="text-2xl font-bold  text-center mb-4">
-          {isLoginForm ? "Login" : "Sign UP"}
+        {/* <p className="flex justify-center text-xl font-bold dark:text-neutral-200">CodeConnect</p> */}
+        <h2 className="text-xl font-semibold  text-center mb-4">
+          {isLoginForm ? "Log in" : "Sign up"}
         </h2>
         <form>
+          
           {!isLoginForm && (
             <>
               <div className="mb-4">
@@ -103,6 +104,7 @@ const Login = () => {
           <div className="mb-4">
             <label className="block  font-medium">Email</label>
             <input
+              placeholder="Enter gmail address"
               type="email"
               value={emailId}
               className="w-full px-4 py-2 mt-1 border rounded-lg "
@@ -115,6 +117,7 @@ const Login = () => {
           <div className="mb-4">
             <label className="block  font-medium">Password</label>
             <input
+              placeholder="Enter password"
               type="password"
               value={password}
               className="w-full px-4 py-2 mt-1 border rounded-lg"
@@ -124,7 +127,7 @@ const Login = () => {
             />
           </div>
 
-          <p className="text-red m-5">{error}</p>
+          <p className="text-red-400 m-5">{error}</p>
           <button
             className="cursor-pointer w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
             type="button"

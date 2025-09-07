@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Body from "./components/Body";
 import Login from "./components/Login";
@@ -10,7 +9,6 @@ import Connections from "./components/Connections";
 import Requests from "./components/requests";
 import { ToastContainer } from 'react-toastify';
 import SearchUsers from "./components/SearchUsers";
-
 
 function App() {
   return (

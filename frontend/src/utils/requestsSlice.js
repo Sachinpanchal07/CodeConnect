@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const requestSlice = createSlice({
     name: "requests",
-    initialState: [],
+    initialState: null,
     reducers:{
         addRequests: (state, action) => action.payload,
         removeRequest: (state, action) => {
-            const newState = state.filter((request)=>request._id != action.payload);
+            const newState = state.filter((request) => request._id !== action.payload);
             return newState;
         }
     },

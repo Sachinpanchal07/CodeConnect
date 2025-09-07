@@ -5,6 +5,7 @@ import { addFeed } from "../utils/feedSlice";
 import axios from "axios";
 import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
@@ -14,16 +15,16 @@ const Feed = () => {
 
   const getFeed = async () => {
     try {
-      if (feed) {
+      if (feed.length > 0) {
         return;
       }
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      dispatch(addFeed(res.data.data));
-      // console.log(res.data.data);
+      dispatch(addFeed(res?.data?.data));
     } catch (err) {
       console.error(err);
+      toast.error(err?.message)
     }
   };
 
@@ -32,7 +33,8 @@ const Feed = () => {
       getFeed();
       return;
     }
-    navigate("/login");
+    else navigate("/login");
+    
   }, []);
 
   if (!feed) return;

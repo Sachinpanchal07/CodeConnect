@@ -12,7 +12,9 @@ const userAuth = async (req, res, next) => {
         }
         const decodedObj = jwt.verify(token, "mySecretkey");
         // console.log("===================================")
-        // console.log(decodedObj);
+        // console.log("decoded obj", decodedObj);
+        // console.log("===================================")
+
         const user = await User.findById(decodedObj._id);
         if(!user){
             throw new Error("user not found");
