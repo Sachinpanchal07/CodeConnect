@@ -21,17 +21,15 @@ const SearchUsers = () => {
       if(cookie){ // check cookie
 
         if(searchedSkill == ""){
-          toast.error("Please enter valid skill")
+          toast.error("Please enter a valid skill !!")
+          dispatch(addSearchUser([]));
            return
-          };
-          // calling api and get the user data
+        };
         const res = await axios.post(BASE_URL+"/user/search", {searchedSkill}, {withCredentials:true});
         const data = res?.data?.data;
 
         if(data.length  >= 0){
           dispatch(addSearchUser(data));
-          // setUsers([...data]);
-          // setsearchedSkill("");
         }
         if (data.length == 0){
           toast.error("Match not found");

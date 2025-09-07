@@ -1,5 +1,5 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require('dotenv').config()
+console.log(process.env)
 const express = require("express");
 const {connectDB} = require("./config/database");
 const app = express();
@@ -26,6 +26,8 @@ app.use("/", authRouter)
 app.use("/", profileRouter)
 app.use("/", requestRouter)
 app.use("/", userRouter)
+
+// const port = process.env.PORT;
 
 
 connectDB().then(()=>{
