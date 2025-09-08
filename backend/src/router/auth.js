@@ -3,19 +3,30 @@ const authRouter = express.Router();
 const {validateSignupData} = require("../utils/validation.js")
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js");
+const getOtp = require("../utils/otp.js");
 
 // signup the user
 authRouter.post("/signup", async (req, res) => {
     try{
       const{firstName, lastName, emailId, password} = req.body;
-      validateSignupData(req); // when user makes the req then this func will be called 
+
+      isUserExist = User.findOne({emailId});
+      if(isUserExist) {
+        throw new Error("User already exist");
+      }
+      // OTP
+      const otp = getOtp();
+
+      validateSignupData(req); // validate data
       const newPass = await bcrypt.hash(password, 10);
       
       const userInstance = new User({
         firstName,
         lastName,
         emailId,
-        password:newPass
+        password:newPass,
+        otp,
+        otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
 
@@ -26,7 +37,7 @@ authRouter.post("/signup", async (req, res) => {
 
       res.json({message: "user added successfully", data:savedUser});
     }catch(err){
-      res.status(400).send("error in saving data: " +  err.message)
+      res.status(400).send("Error in saving data: " +  err.message)
     }
 });
 
