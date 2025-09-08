@@ -57,6 +57,9 @@ authRouter.post("/login", async (req, res) => {
       if(!isPasswordValid){
         throw new Error("Invalid credentials! password not matched");
       }
+      if(!user.isVerified){
+        throw new Error("Please verify your email first !");
+      }
       if(user){
         const token = user.getJWT();
         res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)}); // we can also expires cookies
@@ -75,5 +78,29 @@ authRouter.post("/logout", async (req, res)=>{
   res.cookie("token", null, {expires:new Date(Date.now())});
   res.send("logout successfully");
 })
+
+// verify otp
+authRouter.post("/verify/otp", async (req, res)=>{
+  try{
+    const {emailId, otp} = req.body;
+    const user = User.findOne({emailId});
+    if(!user){
+      throw new Error("User not found");
+    }
+    if(user.otp != otp){
+      throw new Error("Invalid OTP, Please enter correct one!");
+    }
+    if(user.otpExpiry < Date.now()){
+      throw new Error("OTP expired, please generate again");
+    }
+
+    user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpiry = undefined
+    res.status(200).json({message:"Email verified successfully!"}); 
+  }catch(err){
+    res.status(500).json({message:"Error in OTP verification"});
+  }
+});
 
 module.exports = authRouter;
