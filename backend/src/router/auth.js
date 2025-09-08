@@ -4,6 +4,7 @@ const {validateSignupData} = require("../utils/validation.js")
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js");
 const getOtp = require("../utils/otp.js");
+const sendOTP = require("../utils/nodemailer.js");
 
 // signup the user
 authRouter.post("/signup", async (req, res) => {
@@ -29,6 +30,9 @@ authRouter.post("/signup", async (req, res) => {
         otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
+
+      // send otp mail
+      const info = await sendOTP(emailId, otp);
 
       const token = await savedUser.getJWT(); // after signup user must login
       res.cookie("token", token, {
