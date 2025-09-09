@@ -9,6 +9,7 @@ import Connections from "./components/Connections";
 import Requests from "./components/requests";
 import { ToastContainer } from 'react-toastify';
 import SearchUsers from "./components/SearchUsers";
+import OtpVerify from "./components/OtpVerify";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/connections" element={<Connections></Connections>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route>
             <Route path="/Search" element={<SearchUsers></SearchUsers>}></Route>
+            <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>  

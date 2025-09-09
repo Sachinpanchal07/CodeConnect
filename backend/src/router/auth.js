@@ -11,7 +11,7 @@ authRouter.post("/signup", async (req, res) => {
     try{
       const{firstName, lastName, emailId, password} = req.body;
 
-      isUserExist = User.findOne({emailId});
+      const isUserExist = await User.findOne({emailId});
       if(isUserExist) {
         throw new Error("User already exist");
       }
@@ -102,5 +102,19 @@ authRouter.post("/verify/otp", async (req, res)=>{
     res.status(500).json({message:"Error in OTP verification"});
   }
 });
+
+// resend OTP.
+
+authRouter.post("/resent-otp", async (req, res)=>{
+  const{ emailId } = req.body;
+  try{
+    const otp = getOtp();
+    const res = await sendOTP(emailId, otp);
+    return res;
+  }
+  catch(err){
+    return err;
+  }
+})
 
 module.exports = authRouter;

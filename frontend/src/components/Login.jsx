@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import {toast} from "react-toastify";
+
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
@@ -45,8 +47,16 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      dispatch(addUser(res.data.data));
-      return navigate("/profile");
+      const user = res.data.data;
+      if(user.isVerified){
+        dispatch(addUser(res.data.data));
+        return navigate("/profile");
+      }
+      else {
+        navigate("/verify-otp")
+      }
+
+      
     } catch (err) {
       setError(err?.response?.data || "something went wrong");
     }

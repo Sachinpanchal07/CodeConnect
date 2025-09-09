@@ -14,8 +14,8 @@ const sendOTP  = async (email, otp) => {
         from: "codeconnect.application@gmail.com",
         to:email,
         subject:"OTP for CodeConnect signup",
-        text:`Dear User, your OTP for signup is ${otp}
-              IT WILL EXPIRE IN 5 MINUTES`
+        text:`Dear User your OTP for signup is ${otp}, It is valid for 5 minutes only.`
+              
     }
     try{
         let info = await transporter.sendMail(mailOptions);
