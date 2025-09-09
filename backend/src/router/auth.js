@@ -80,7 +80,7 @@ authRouter.post("/logout", async (req, res)=>{
 })
 
 // verify otp
-authRouter.post("/verify/otp", async (req, res)=>{
+authRouter.post("/verify-otp", async (req, res)=>{
   try{
     const {emailId, otp} = req.body;
     const user = User.findOne({emailId});

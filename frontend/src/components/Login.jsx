@@ -53,7 +53,7 @@ const Login = () => {
         return navigate("/profile");
       }
       else {
-        navigate("/verify-otp")
+        navigate("/verify-otp", {state: { emailId }})
       }
 
       
