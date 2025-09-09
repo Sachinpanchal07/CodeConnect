@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -6,7 +5,6 @@ import { addUser } from '../utils/userSlice'
 import { BASE_URL } from '../utils/constants'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-// import { set } from 'mongoose'
 
 function OtpVerify() {
 
@@ -24,18 +22,19 @@ function OtpVerify() {
         navigate("/login");
     }
 
-    const handleVerifyOtp = async () =>{
+    const handleVerifyOtp = async () => {
         try {
-
             setLoading(true);
+            if(otp == "") throw new Error("Please enter valid OTP!");
             const res = await axios.post(BASE_URL+"/verify-otp", {emailId, otp}, {withCredentials:true});
-            dispatch(res.data.data);
+            dispatch(addUser(res.data.data));
             toast.success("OTP verified successfully!");
             navigate("/profile");
 
         } catch(err){
-            setError(err?.response?.data || "Invalid OTP!, Try again.");
-            toast.error(error);
+            const msg = err?.response?.data?.message || "Invalid OTP!, Try again.";
+            setError(msg);
+            toast.error(msg);
         } finally{
             setLoading(false);
         }
@@ -44,7 +43,7 @@ function OtpVerify() {
     const handleResendOtp = async () => {
         try{
             setLoading(true);
-            res = await axios.post(BASE_URL+"/resend-otp", {emailId, otp}, {withCredentials:true});
+            const res = await axios.post(BASE_URL+"/resend-otp", {emailId}, {withCredentials:true});
             toast.info("New OTP sent to your email.");
         } catch(err){
             setError(err?.response?.data || "Failed to resend OTP");
@@ -77,7 +76,7 @@ function OtpVerify() {
                 onClick={handleVerifyOtp}
                 disabled={loading}
             >
-                {loading ? "verifying" : "verify OTP"}
+                {loading ? "working..." : "verify OTP"}
             </button>
 
             <p className='text-center'>
@@ -89,4 +88,4 @@ function OtpVerify() {
   );
 };
 
-export default OtpVerify
+export default OtpVerify;

@@ -83,11 +83,14 @@ authRouter.post("/logout", async (req, res)=>{
 authRouter.post("/verify-otp", async (req, res)=>{
   try{
     const {emailId, otp} = req.body;
-    const user = User.findOne({emailId});
+    const user = await User.findOne({emailId});
+    if(otp == "") {
+      throw new Error ("Please enter the opt!");
+    }
     if(!user){
       throw new Error("User not found");
     }
-    if(user.otp != otp){
+    if(user.otp !== otp){
       throw new Error("Invalid OTP, Please enter correct one!");
     }
     if(user.otpExpiry < Date.now()){
@@ -97,6 +100,9 @@ authRouter.post("/verify-otp", async (req, res)=>{
     user.isVerified = true;
     user.otp = undefined;
     user.otpExpiry = undefined
+
+    await user.save();
+
     res.status(200).json({message:"Email verified successfully!"}); 
   }catch(err){
     res.status(500).json({message:"Error in OTP verification"});
@@ -105,15 +111,25 @@ authRouter.post("/verify-otp", async (req, res)=>{
 
 // resend OTP.
 
-authRouter.post("/resent-otp", async (req, res)=>{
+authRouter.post("/resend-otp", async (req, res)=>{
   const{ emailId } = req.body;
   try{
+    const user = await User.findOne({emailId});
+    if(!user){
+      return res.status(404).json({message: "User not found! "});
+    }
+
     const otp = getOtp();
-    const res = await sendOTP(emailId, otp);
-    return res;
+    user.otp = otp;
+    user.otpExpiry = Date.now() + 5 * 60 * 1000;
+    await user.save();
+
+    await sendOTP(emailId, otp);
+    return res.status(200).json({message: "OTP resent successfully!"});
   }
   catch(err){
-    return err;
+    console.log("Error in resending the otp", err.message);
+    return res.status(500).json({message: "Error in resending OTP"});
   }
 })
 

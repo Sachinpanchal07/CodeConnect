@@ -23,7 +23,7 @@ function App() {
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/connections" element={<Connections></Connections>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route>
-            <Route path="/Search" element={<SearchUsers></SearchUsers>}></Route>
+            <Route path="/search" element={<SearchUsers></SearchUsers>}></Route>
             <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
           </Route>
         </Routes>

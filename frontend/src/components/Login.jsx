@@ -65,10 +65,10 @@ const Login = () => {
   // handle if user already logged in
   useEffect(()=>{
     const cookie = document.cookie;
-    if(cookie){
-      navigate("/");
+    if (cookie.includes("token=")) {   // only redirect if token exists
+    navigate("/");
     }
-  })
+  },[navigate])
 
   return (
     <div className="flex justify-center items-center m-5 dark:text-neutral-300">

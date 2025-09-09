@@ -19,8 +19,8 @@ const Body = () => {
       const res = await axios.get(BASE_URL + "/profile/view",{withCredentials:true});
       dispatch(addUser(res.data));
     }catch(err){
-      if(err.status === 401){ // server sends status 401 when token not found in backend
-        navigate("/login")
+      if(err.response?.status === 401){ // server sends status 401 when token not found in backend
+        navigate("/login");
       }
     }
   };
@@ -53,4 +53,4 @@ const Body = () => {
   )
 }
 
-export default Body
+export default Body;
