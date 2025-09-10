@@ -5,6 +5,7 @@ import { addUser } from '../utils/userSlice'
 import { BASE_URL } from '../utils/constants'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { BeatLoader } from 'react-spinners';
 
 function OtpVerify() {
 
@@ -28,6 +29,8 @@ function OtpVerify() {
             if(otp == "") throw new Error("Please enter valid OTP!");
             const res = await axios.post(BASE_URL+"/verify-otp", {emailId, otp}, {withCredentials:true});
             dispatch(addUser(res.data.data));
+            // console.log("====================================")
+            // console.log(res.data.data);
             toast.success("OTP verified successfully!");
             navigate("/profile");
 
@@ -72,11 +75,11 @@ function OtpVerify() {
             {error && <p className='text-red-400 text-center mb-3'>{error}</p>}
 
             <button
-                className='w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200 mb-3'
+                className='w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200 mb-3 cursor-pointer'
                 onClick={handleVerifyOtp}
                 disabled={loading}
             >
-                {loading ? "working..." : "verify OTP"}
+                {loading ? <BeatLoader/> : "verify OTP"}
             </button>
 
             <p className='text-center'>

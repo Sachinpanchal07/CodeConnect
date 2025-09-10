@@ -5,6 +5,7 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import {toast} from "react-toastify";
+import {BeatLoader} from 'react-spinners';
 
 
 const Login = () => {
@@ -14,13 +15,16 @@ const Login = () => {
   const [lastName, setLastName] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // handle login
   const handleLogin = async () => {
+    
     try {
+      setLoading(true);
       const res = await axios.post(
         BASE_URL + "/login",
         {
@@ -34,13 +38,16 @@ const Login = () => {
       return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "something went wrong");
-      // console.error(err);
+    } finally{
+      setLoading(false);
     }
+    
   };
 
   // handle signup
   const handleSignup = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         BASE_URL + "/signup",
         { firstName, lastName, emailId, password },
@@ -59,6 +66,9 @@ const Login = () => {
       
     } catch (err) {
       setError(err?.response?.data || "something went wrong");
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -87,6 +97,7 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
+                  placeholder="Enter first name"
                   value={firstName}
                   className="w-full px-4 py-2 mt-1 border rounded-lg "
                   onChange={(e) => {
@@ -101,6 +112,7 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
+                  placeholder="Enter last name"
                   value={lastName}
                   className="w-full px-4 py-2 mt-1 border rounded-lg "
                   onChange={(e) => {
@@ -143,7 +155,7 @@ const Login = () => {
             type="button"
             onClick={isLoginForm ? handleLogin : handleSignup}
           >
-            {isLoginForm ? "Login" : "Sign Up"}
+            {loading == false ? isLoginForm ? "Login" : "Sign Up" : <BeatLoader/>}
           </button>
 
           <p

@@ -12,9 +12,29 @@ authRouter.post("/signup", async (req, res) => {
       const{firstName, lastName, emailId, password} = req.body;
 
       const isUserExist = await User.findOne({emailId});
-      if(isUserExist) {
-        throw new Error("User already exist");
+      if(isUserExist && isUserExist.isVerified == false) {
+        await User.findByIdAndDelete(isUserExist._id);
+        // const otp = getOtp();
+
+        // validateSignupData(req); // validate data
+        // const newPass = await bcrypt.hash(password, 10);
+        
+        // const userInstance = new User({
+        //   firstName,
+        //   lastName,
+        //   emailId,
+        //   password:newPass,
+        //   otp,
+        //   otpExpiry: Date.now() + 5 * 60 * 1000,
+        // }); // creating user instance
+        // const savedUser = await userInstance.save();
+
+        // // send otp mail
+        // const info = await sendOTP(emailId, otp);
+
+        // res.status(200).json({message: "user added successfully", data:savedUser});
       }
+
       // OTP
       const otp = getOtp();
 
@@ -34,12 +54,7 @@ authRouter.post("/signup", async (req, res) => {
       // send otp mail
       const info = await sendOTP(emailId, otp);
 
-      const token = await savedUser.getJWT(); // after signup user must login
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000),
-      });
-
-      res.json({message: "user added successfully", data:savedUser});
+      res.status(200).json({message: "user added successfully", data:savedUser});
     }catch(err){
       res.status(400).send("Error in saving data: " +  err.message)
     }
@@ -47,7 +62,9 @@ authRouter.post("/signup", async (req, res) => {
 
   // login user
 authRouter.post("/login", async (req, res) => {
+
     try{
+      
       const {emailId, password} = req.body;
       const user = await User.findOne({ emailId : emailId });
       if(!user){
@@ -58,7 +75,7 @@ authRouter.post("/login", async (req, res) => {
         throw new Error("Invalid credentials! password not matched");
       }
       if(!user.isVerified){
-        throw new Error("Please verify your email first !");
+        throw new Error("Please verify your email first by signup");
       }
       if(user){
         const token = user.getJWT();
@@ -69,7 +86,7 @@ authRouter.post("/login", async (req, res) => {
         throw new Error("invalid credentials ");
       }
     }catch(err){
-      res.status(400).send("ERROR : " + err.message);
+      res.status(400).send(err.message);
     }
 })
 
@@ -100,12 +117,15 @@ authRouter.post("/verify-otp", async (req, res)=>{
     user.isVerified = true;
     user.otp = undefined;
     user.otpExpiry = undefined
+    const savedUser = await user.save();
 
-    await user.save();
+    // generate token after user verified
+    const token = user.getJWT();
+    res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)});
 
-    res.status(200).json({message:"Email verified successfully!"}); 
+    res.status(200).json({message:"Email verified successfully!", data:savedUser}); 
   }catch(err){
-    res.status(500).json({message:"Error in OTP verification"});
+    res.status(500).json({message:err.message || "Error in OTP verification"});
   }
 });
 
