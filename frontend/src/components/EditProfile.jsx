@@ -208,7 +208,7 @@ const EditProfile = ({ user }) => {
               <p className="text-red-400 text-sm m-2">{error}</p>
 
               <button
-                className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+                className="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
                 type="button"
                 onClick={saveProfile}
               >

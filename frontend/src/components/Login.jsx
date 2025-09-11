@@ -48,6 +48,10 @@ const Login = () => {
   const handleSignup = async () => {
     try {
       setLoading(true);
+      if(firstName.length < 4){
+        setError("Error: Use atleast 4 characters in name");
+        return;
+      }
       const res = await axios.post(
         BASE_URL + "/signup",
         { firstName, lastName, emailId, password },
@@ -63,9 +67,8 @@ const Login = () => {
         navigate("/verify-otp", {state: { emailId }})
       }
 
-      
     } catch (err) {
-      setError(err?.response?.data || "something went wrong");
+      setError(err?.response?.data || "Error: Something went wrong!");
     }
     finally{
       setLoading(false);

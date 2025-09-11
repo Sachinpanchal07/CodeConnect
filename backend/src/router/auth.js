@@ -14,30 +14,14 @@ authRouter.post("/signup", async (req, res) => {
       const isUserExist = await User.findOne({emailId});
       if(isUserExist && isUserExist.isVerified == false) {
         await User.findByIdAndDelete(isUserExist._id);
-        // const otp = getOtp();
+      }
 
-        // validateSignupData(req); // validate data
-        // const newPass = await bcrypt.hash(password, 10);
-        
-        // const userInstance = new User({
-        //   firstName,
-        //   lastName,
-        //   emailId,
-        //   password:newPass,
-        //   otp,
-        //   otpExpiry: Date.now() + 5 * 60 * 1000,
-        // }); // creating user instance
-        // const savedUser = await userInstance.save();
-
-        // // send otp mail
-        // const info = await sendOTP(emailId, otp);
-
-        // res.status(200).json({message: "user added successfully", data:savedUser});
+      if(isUserExist && isUserExist.isVerified == true){
+        throw new Error("User already exist please login !");
       }
 
       // OTP
       const otp = getOtp();
-
       validateSignupData(req); // validate data
       const newPass = await bcrypt.hash(password, 10);
       
@@ -50,13 +34,12 @@ authRouter.post("/signup", async (req, res) => {
         otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
-
       // send otp mail
       const info = await sendOTP(emailId, otp);
 
       res.status(200).json({message: "user added successfully", data:savedUser});
     }catch(err){
-      res.status(400).send("Error in saving data: " +  err.message)
+      res.status(400).send("Error: " +  err.message)
     }
 });
 

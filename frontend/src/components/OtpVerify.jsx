@@ -29,8 +29,6 @@ function OtpVerify() {
             if(otp == "") throw new Error("Please enter valid OTP!");
             const res = await axios.post(BASE_URL+"/verify-otp", {emailId, otp}, {withCredentials:true});
             dispatch(addUser(res.data.data));
-            // console.log("====================================")
-            // console.log(res.data.data);
             toast.success("OTP verified successfully!");
             navigate("/profile");
 

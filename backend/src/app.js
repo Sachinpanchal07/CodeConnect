@@ -1,5 +1,5 @@
+// console.log(process.env)
 require('dotenv').config()
-console.log(process.env)
 const express = require("express");
 const {connectDB} = require("./config/database");
 const app = express();
@@ -11,6 +11,7 @@ const requestRouter = require("./router/request.js")
 const profileRouter = require("./router/profile.js");
 const userRouter = require("./router/user.js");
 const cors = require("cors");
+require("./utils/cronjob");
 
 app.use(cors({
   origin:"http://localhost:5173",

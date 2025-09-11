@@ -10,9 +10,6 @@ const {Skills} = require("../utils/skills.js");
 profileRouter.get("/profile/view", userAuth, async (req, res)=>{
     try{
       const user = req.user;
-      // console.log(req);
-      // console.log("===========================================")
-      // console.log(user);
      if(!user){
         throw new Error("user not found");
       }
