@@ -66,39 +66,44 @@ const NavBar = () => {
       </div>
       <div className="flex gap-2">
         {user && (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full ">
-                <img alt="user photo" src={user.photoUrl} />
+          <div className="flex flex-row">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full ">
+                  <img alt="user photo" src={user.photoUrl} />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-neutral-200 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200"
+              >
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/Connections">Connections</Link>
+                </li>
+                <li>
+                  <Link to="/requests">Requests</Link>
+                </li>
+                <li>
+                  <Link to="/Search">Search</Link>
+                </li>
+                <li>
+                  <a onClick={handleLogout}>Logout</a>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-neutral-200 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200"
-            >
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-              <li>
-                <Link to="/Connections">Connections</Link>
-              </li>
-              <li>
-                <Link to="/requests">Requests</Link>
-              </li>
-              <li>
-                <Link to="/Search">Search</Link>
-              </li>
-              <li>
-                <a onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
+            <div className="px-5 py-2 mx-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:via-orange-600 hover:to-amber-700 transition duration-300">
+              <Link to="/premium">Upgrade</Link>
+            </div>
           </div>
         )}
       </div>

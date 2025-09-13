@@ -1,5 +1,5 @@
 // npm i node-cron
-// npm i date-fns --> to calculate data 
+// npm i date-fns --> to calculate date
 const cron = require("node-cron");
 const {subDays, startOfDay, endOfDay} = require("date-fns");
 const ConnectionRequest = require("../models/connectionRequst");

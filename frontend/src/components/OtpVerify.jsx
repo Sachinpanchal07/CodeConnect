@@ -5,7 +5,8 @@ import { addUser } from '../utils/userSlice'
 import { BASE_URL } from '../utils/constants'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners'
+import CountDown from 'react-countdown'
 
 function OtpVerify() {
 
@@ -53,10 +54,20 @@ function OtpVerify() {
         }
     }
 
+    const optTimer = async () => {
+        const [otpExpire, setOtpExpire] = useState(300000);
+    }
+
   return (
     <div className='flex justify-center items-center min-h-screen dark:text-neutral-300'>
         <div className='dark:bg-neutral-600 p-6 rounded-2xl shadow-xl w-96'>
-            <h2 className='text-xl font-semibold text-center mb-4'>Verify OTP</h2>
+            <div>
+
+                <h2 className='text-xl font-semibold text-center mb-4'>Verify OTP</h2>
+                <span><CountDown date={Date.now() + 30000}></CountDown></span>
+
+            </div>
+           
             <p className='text-sm text-center mb-4'>
                 We have sent a 6 digit OTP to <span className='font-medium'>{emailId}</span>
             </p>

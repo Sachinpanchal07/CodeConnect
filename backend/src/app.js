@@ -6,10 +6,11 @@ const app = express();
 const cookieParser = require("cookie-parser");
 
 // import the routers and use them
-const authRouter = require("./router/auth.js")
-const requestRouter = require("./router/request.js")
+const authRouter = require("./router/auth.js");
+const requestRouter = require("./router/request.js");
 const profileRouter = require("./router/profile.js");
 const userRouter = require("./router/user.js");
+const paymentRouter = require("./router/payments.js");
 const cors = require("cors");
 require("./utils/cronjob");
 
@@ -27,6 +28,7 @@ app.use("/", authRouter)
 app.use("/", profileRouter)
 app.use("/", requestRouter)
 app.use("/", userRouter)
+app.use("/", paymentRouter)
 
 // const port = process.env.PORT;
 
