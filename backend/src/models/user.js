@@ -77,6 +77,10 @@ const userSchema = new mongoose.Schema(
     },
     otpExpiry: {
       type: Date
+    },
+    isPremium: {
+      type: Boolean,
+      default: false,
     }
   },
   {

@@ -161,14 +161,14 @@ const Login = () => {
             {loading == false ? isLoginForm ? "Login" : "Sign Up" : <BeatLoader/>}
           </button>
 
-          <p
+          <div
             className="cursor-pointer mt-2 flex justify-center "
             onClick={() => setIsLoginForm((value) => !value)}
           >
             {isLoginForm
               ? <p>New User? <span className="text-blue-600 underline">SignUp here</span></p>
               : <p>Existing User? <span className="text-blue-600 underline">Login Here</span></p>}
-          </p>
+          </div>
         </form>
       </div>
     </div>
