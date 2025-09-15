@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import SearchUsers from "./components/SearchUsers";
 import OtpVerify from "./components/OtpVerify";
 import Premium from "./components/Premium";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/search" element={<SearchUsers></SearchUsers>}></Route>
             <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
             <Route path="/premium" element={<Premium></Premium>}></Route>
+            <Route path="/chat/:userid" element={<Chat></Chat>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>  

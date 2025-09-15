@@ -4,6 +4,12 @@ const express = require("express");
 const {connectDB} = require("./config/database");
 const app = express();
 const cookieParser = require("cookie-parser");
+const http = require("http");
+const initializeSocket = require("./utils/socket.js");
+
+// for web socket
+const server = http.createServer(app);
+initializeSocket(server);
 
 // import the routers and use them
 const authRouter = require("./router/auth.js");
@@ -37,7 +43,7 @@ connectDB().then(()=>{
   console.log("database connected successfully");
   // when db is connected then the app.listen starting accepting the request.
   // best way to connect to db.
-  app.listen(3000, () => { 
+  server.listen(3000, () => { 
     console.log("server is listening at port 3000");
   });
 })

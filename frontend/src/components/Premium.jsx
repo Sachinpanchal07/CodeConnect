@@ -19,12 +19,11 @@ const Premium = () => {
         const res = await axios.get(BASE_URL + "/premium/verify", {withCredentials:true});
         setIsUserVerified(res.data.isVerify);
     }catch(err){
-      console.log("Error in verify premium user", err);
+      console.log("Error in verifying premium user", err);
     }
-    
   };
 
-  // handle click pay 700 button.
+  // handle click pay Rs700 button.
   const handleUpgradeClick = async (type) => {
     try {
       setLoading(true);

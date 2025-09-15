@@ -54,7 +54,8 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <div>
+      <div className="flex">
+        {/* <button className=" bg-gray-600  p-2">Report bugg</button> */}
         <button
           onClick={toggleDarkMode}
           className="bg-amber-600 hover:bg-amber-500 cursor-pointer rounded-full flex justify-center align-middle p-[6px] mr-4"
@@ -101,9 +102,11 @@ const NavBar = () => {
                 </li>
               </ul>
             </div>
-            <div className="px-5 py-2 mx-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:via-orange-600 hover:to-amber-700 transition duration-300">
-              <Link to="/premium">Upgrade</Link>
-            </div>
+            {!user.isPremium && (
+              <div className="px-5 py-2 cursor-pointer mx-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:via-orange-600 hover:to-amber-700 transition duration-300">
+                <Link to="/premium">Premium</Link>
+              </div>
+            )}
           </div>
         )}
       </div>
