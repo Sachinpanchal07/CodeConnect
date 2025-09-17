@@ -13,8 +13,7 @@ const ConnectionCard = ({ connection }) => {
   const dispatch = useDispatch();
 
   if (!connection) return null;
-  const { _id, firstName, lastName, age, gender, photoUrl, about, skills } =
-    connection;
+  const { _id, firstName, lastName, age, gender, photoUrl, about, skills } = connection;
 
   const handleRemoveConnection = async () => {
     try {

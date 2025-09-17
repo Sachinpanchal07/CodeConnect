@@ -28,7 +28,7 @@ function App() {
             <Route path="/search" element={<SearchUsers></SearchUsers>}></Route>
             <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
             <Route path="/premium" element={<Premium></Premium>}></Route>
-            <Route path="/chat/:userid" element={<Chat></Chat>}></Route>
+            <Route path="/chat/:targetUserId" element={<Chat></Chat>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>  
