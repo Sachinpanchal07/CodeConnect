@@ -14,11 +14,19 @@ const Chat = () => {
   const userId = user?._id;
 
   const fetchChatMessages = async () => {
-   const res =  await axios.get(BASE_URL+"/chat/"+targetUserId, {withCredentials:true})
-   console.log(res.data.chat.messages);
+    const res = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+      withCredentials: true,
+    });
+    const chats = res.data.chat.messages;
+
+    const chatMessages = chats.map((msg) => {
+      return { firstName: msg?.senderId.firstName, text: msg?.text };
+    });
+    setMessages(chatMessages);
+    console.log(chatMessages);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchChatMessages();
   }, []);
 
@@ -50,7 +58,6 @@ const Chat = () => {
       text: newMessage,
     });
     setNewMessage("");
-
   };
 
   return (
@@ -62,22 +69,19 @@ const Chat = () => {
         </div>
         <div className="flex-1 p-4 space-y-3 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
           {messages?.map((msg, index) => {
+            const isMe = user.firstName === msg.firstName;
             return (
               <div key={index}>
-                <div className="flex flex-col items-start ">
-                  <div className="chat-header text-gray-400">
-                    {msg.firstName}
-                  </div>
-                  <div className="bg-gray-700 px-3 py-2 rounded-lg rounded-bl-none max-w-[70%] text-sm">
+                <div className={"chat " + (isMe ? "chat-end" : "chat-star ")}>
+                  <div className="chat-header text-gray-400">{msg.firstName}</div>
+                  <div
+                    className={
+                      "chat-bubble " + (isMe ? "bg-blue-500 text-white" : "bg-gray-300")
+                    }
+                  >
                     {msg.text}
                   </div>
                 </div>
-
-                {/* <div className="flex justify-end">
-                  <div className="bg-blue-500 px-3 py-2 rounded-lg rounded-br-none max-w-[70%] text-sm">
-                    {msg.text}
-                  </div>
-                </div> */}
               </div>
             );
           })}
