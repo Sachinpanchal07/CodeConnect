@@ -14,11 +14,12 @@ const initializeSocket = (server)=> {
         });
 
         socket.on("sendMessage",async ({firstName, userId, targetUserId, text}) => {
-            // cliet send data/message to server then server will send this message to room.
+            // client send data/message to server then server will send/broadcast this message to room.
             const roomId = [userId, targetUserId].sort().join("_");
             console.log(firstName + ": " + " " + text);
-            // const toUser = await User.findById(targetUserId);
-            // const {to_firstName, to_photoUrl} = toUser;
+           
+            
+
             io.to(roomId).emit("messageReceived", {firstName, text});
         });
 

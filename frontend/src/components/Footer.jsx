@@ -6,7 +6,10 @@ const Footer = () => {
       <aside className="text-center sm:text-left">
         <p className="text-neutral-800 dark:text-neutral-200 text-sm">Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
-      <i className="bx bx-bug text-black cursor-pointer hover:text-blue-600 bx-sm"></i>
+      <button className="p-1 px-2 bg-amber-400 text-white cursor-pointer rounded-sm">
+        <i className="bx bx-bug cursor-pointer mr-1 "></i>
+        Report Issue
+      </button>
     </footer>
   );
 };

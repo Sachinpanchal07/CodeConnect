@@ -18,7 +18,8 @@ const Chat = () => {
     // emit the joinChat event. (joinChat should be same as backend even).
     socket.emit("joinChat", { userId, targetUserId });
 
-    // write this "messageRecevied" event in usedEffect for better exp.
+    // write this "messageRecevied" event in usedEffect.
+    // here server send meesage to client and client listens that.
     socket.on("messageReceived", ({ firstName, text }) => {
       console.log(firstName + ": " + " " + text);
       setMessages((prev) => [...prev, { firstName, text }]);
@@ -51,7 +52,7 @@ const Chat = () => {
   return (
     <div className="flex w-full h-full justify-center mt-10">
       <div className="flex flex-col h-[500px] w-[700px] bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
+        <div className="bg-gray-800 px-4 py-3 flex items-center justify-between  border-b border-gray-700">
           <h2 className="font-semibold text-lg">Chat</h2>
           <span className="text-sm text-gray-400">Online</span>
         </div>
@@ -59,8 +60,8 @@ const Chat = () => {
           {messages?.map((msg, index) => {
             return (
               <div  key={index}>
-                <div className="flex items-start">
-                  <div className="chat-header">{msg.firstName}</div>
+                <div className="flex flex-col items-start ">
+                  <div className="chat-header text-gray-400">{msg.firstName}</div>
                   <div className="bg-gray-700 px-3 py-2 rounded-lg rounded-bl-none max-w-[70%] text-sm">
                     {msg.text}
                   </div>
