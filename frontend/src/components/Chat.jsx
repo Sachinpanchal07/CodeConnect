@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -11,15 +13,21 @@ const Chat = () => {
   const user = useSelector((store) => store.user);
   const userId = user?._id;
 
+  const fetchChatMessages = async () => {
+   const res =  await axios.get(BASE_URL+"/chat/"+targetUserId, {withCredentials:true})
+   console.log(res.data.chat.messages);
+  };
+
+  useEffect(()=>{
+    fetchChatMessages();
+  }, []);
+
   // when the page loads then the socket connection is made, the "joinChat" event is emitted.
-  // if(!userId) return;
   useEffect(() => {
     const socket = createSocketConnection();
-    // emit the joinChat event. (joinChat should be same as backend even).
     socket.emit("joinChat", { userId, targetUserId });
 
     // write this "messageRecevied" event in usedEffect.
-    // here server send meesage to client and client listens that.
     socket.on("messageReceived", ({ firstName, text }) => {
       console.log(firstName + ": " + " " + text);
       setMessages((prev) => [...prev, { firstName, text }]);
@@ -43,10 +51,6 @@ const Chat = () => {
     });
     setNewMessage("");
 
-    // here server send meesage to client and client listens that.
-    // socket.on("messageReceived", ({firstName, text}) => {
-    //   console.log(firstName + ": " + " " + text);
-    // })
   };
 
   return (
@@ -59,9 +63,11 @@ const Chat = () => {
         <div className="flex-1 p-4 space-y-3 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
           {messages?.map((msg, index) => {
             return (
-              <div  key={index}>
+              <div key={index}>
                 <div className="flex flex-col items-start ">
-                  <div className="chat-header text-gray-400">{msg.firstName}</div>
+                  <div className="chat-header text-gray-400">
+                    {msg.firstName}
+                  </div>
                   <div className="bg-gray-700 px-3 py-2 rounded-lg rounded-bl-none max-w-[70%] text-sm">
                     {msg.text}
                   </div>
@@ -88,6 +94,7 @@ const Chat = () => {
           />
           <button
             onClick={handleSendMessage}
+            // onKeyDown={handleSendMessage}
             className="text-center cursor-pointer bg-green-500 hover:bg-green-600 px-3 py-2 rounded-full transition"
           >
             <i className="bx bxs-send bs"></i>

@@ -17,6 +17,7 @@ const requestRouter = require("./router/request.js");
 const profileRouter = require("./router/profile.js");
 const userRouter = require("./router/user.js");
 const paymentRouter = require("./router/payments.js");
+const chatRouter = require("./router/chat.js");
 const cors = require("cors");
 require("./utils/cronjob");
 
@@ -35,6 +36,7 @@ app.use("/", profileRouter)
 app.use("/", requestRouter)
 app.use("/", userRouter)
 app.use("/", paymentRouter)
+app.use("/", chatRouter)
 
 // const port = process.env.PORT;
 
