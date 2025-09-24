@@ -273,7 +273,7 @@ const Exp = () => {
             <div class="flex-1">
               <h2 class="text-2xl font-bold text-primary mb-2">DevTinder</h2>
               <p class="text-sm leading-relaxed opacity-90 max-w-md">
-                DevTinder is a platform built for developers to connect,
+                CodeConnect is a platform built for developers to connect,
                 collaborate, and build side projects together. Whether you're
                 looking for a co-founder, mentor, or teammate — this is your
                 space.

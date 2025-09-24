@@ -44,9 +44,8 @@ const Body = () => {
 
   return (
     <div className='dark:bg-neutral-800 h-screen'>
-      <div className='italic' >
+      
         <NavBar></NavBar>
-      </div>
         <Outlet></Outlet>
         <Footer></Footer>
     </div>
