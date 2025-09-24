@@ -12,6 +12,7 @@ import SearchUsers from "./components/SearchUsers";
 import OtpVerify from "./components/OtpVerify";
 import Premium from "./components/Premium";
 import Chat from "./components/Chat";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Body></Body>}>
             <Route path="/" element={<Feed></Feed>}></Route>
+            <Route path="/home" element={<Home></Home>}></Route>
             <Route path="/login" element={<Login></Login>}></Route> 
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/connections" element={<Connections></Connections>}></Route>

@@ -33,6 +33,7 @@ const Chat = () => {
   // when the page loads then the socket connection is made, the "joinChat" event is emitted.
   useEffect(() => {
     const socket = createSocketConnection();
+
     socket.emit("joinChat", { userId, targetUserId });
 
     // write this "messageRecevied" event in usedEffect.
@@ -51,6 +52,8 @@ const Chat = () => {
     const socket = createSocketConnection();
 
     // send message to server when click send button by emitting the even "sendMessage".
+    // TODOs: check if userId and targetUserId are friends
+
     socket.emit("sendMessage", {
       firstName: user.firstName,
       userId,
@@ -71,16 +74,18 @@ const Chat = () => {
           {messages?.map((msg, index) => {
             const isMe = user.firstName === msg.firstName;
             return (
-              <div key={index}>
-                <div className={"chat " + (isMe ? "chat-end" : "chat-star ")}>
-                  <div className="chat-header text-gray-400">{msg.firstName}</div>
-                  <div
-                    className={
-                      "chat-bubble " + (isMe ? "bg-blue-500 text-white" : "bg-gray-300")
-                    }
-                  >
-                    {msg.text}
-                  </div>
+              <div
+                key={index}
+                className={"chat " + (isMe ? "chat-end" : "chat-star ")}
+              >
+                <div className="chat-header text-gray-400">{msg.firstName}</div>
+                <div
+                  className={
+                    "chat-bubble " +
+                    (isMe ? "bg-blue-500 text-white" : "bg-gray-300")
+                  }
+                >
+                  {msg.text}
                 </div>
               </div>
             );
