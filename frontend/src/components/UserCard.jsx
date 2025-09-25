@@ -30,9 +30,9 @@ const UserCard = ({ user }) => {
 
   return (
 <div className="flex justify-center m-6">
-  <div className="w-80 bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-200 rounded-xl shadow-xl shadow-orange-500/50 hover:shadow-orange-500/30 transition-shadow duration-300">
+  <div className="w-80 text-gray-300 bg-gray-900/70 p-8 rounded-xl shadow-xl transition-transform duration-500 ease-in-out hover:scale-103 ">
     {/* Image */}
-    <figure className="rounded-t-xl overflow-hidden">
+    <figure className="rounded-xl overflow-hidden">
       <img
         src={photoUrl}
         alt="user photo"
@@ -41,8 +41,8 @@ const UserCard = ({ user }) => {
     </figure>
 
     {/* Content */}
-    <div className="p-5 ">
-      <h2 className="text-2xl font-semibold mb-1">
+    <div className="pt-4 ">
+      <h2 className="text-2xl font-bold mb-1 py-3  bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent">
         {firstName + " " + lastName}
       </h2>
 
@@ -59,15 +59,15 @@ const UserCard = ({ user }) => {
       <p className="text-sm mb-4 leading-relaxed">{about}</p>
 
       {/* Buttons */}
-      <div className="flex justify-end space-x-2">
+      <div className="flex justify-between">
         <button
-          className="px-4 py-1 text-sm rounded-full cursor-pointer border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-neutral-800 transition"
+          className="px-4 py-1 rounded-md cursor-pointer border border-red-400 text-red-400 transition-transform hover:scale-105 duration-300"
           onClick={() => handleSendRequest("ignored", _id)}
         >
           Ignore
         </button>
         <button
-          className="px-4 py-1 text-sm rounded-full cursor-pointer border border-orange-400 text-black bg-orange-400 hover:bg-orange-500 transition"
+          className="px-4 py-1 text-white rounded-md cursor-pointer bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400 transition-transform hover:scale-105 duration-300"
           onClick={() => handleSendRequest("interested", _id)}
         >
           Interested

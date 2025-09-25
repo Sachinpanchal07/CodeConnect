@@ -3,12 +3,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { ReactTyped } from "react-typed";
 import Marquee from "react-fast-marquee";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import { Navigate } from "react-router-dom";
 
 function Home() {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
+
+   useEffect(() => {
+      const cookie = document.cookie;
+      if (cookie.includes("token=")) {
+        // only redirect if token exists
+        navigate("/feed");
+      }
+    }, [navigate]);
 
   // flipping text.
   const lines = [

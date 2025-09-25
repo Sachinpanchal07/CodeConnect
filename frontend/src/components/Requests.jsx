@@ -40,11 +40,11 @@ const Requests = () => {
 
     if(!requests)return;
     if(requests.length === 0){
-        return (<p className="mt-10 flex justify-center text-xl">No Connections Requests Found</p>)
+        return (<p className="py-60  text-center text-xl md:text-2xl">No Connections Requests Found !!</p>)
     }
 
   return (
-    <div className='flex flex-wrap justify-evenly flex-start'>
+    <div className='min-h-screen flex flex-wrap justify-evenly flex-start'>
       {
         requests.map((request,index)=>{
             return (

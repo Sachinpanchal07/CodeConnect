@@ -6,6 +6,8 @@ import axios from "axios";
 import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ReactTyped } from "react-typed";
+import { useState } from "react";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
@@ -24,45 +26,74 @@ const Feed = () => {
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
       console.error(err);
-      toast.error(err?.message)
+      toast.error(err?.message);
     }
   };
+
+  const arr = ["Connect", "Code", "Collaborate", "Conquer"];
+  const [idx, setIdx] = useState(0);
+  useEffect(()=>{
+    setInterval(()=>{
+        const interval = setIdx(()=> idx % arr.length + 1)
+        return ()=>clearInterval(interval)
+    }, 1000)
+  })
 
   useEffect(() => {
     if (cookie) {
       getFeed();
       return;
-    }
-    else navigate("/login");
-    
+    } else navigate("/login");
   }, []);
 
   if (!feed) return;
   if (feed.length === 0) {
     return (
-      <p className="h-screen flex justify-center text-xl pt-40 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">No new users found !</p>
+      <p className="h-screen flex justify-center text-xl pt-40 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
+        No new users found !
+      </p>
     );
   }
 
   return (
     feed && (
-      <div className="bg-gradient-to-br 
-                from-orange-100 via-white to-orange-200 
-                dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
-        <div className="h-screen flex justify-center align-center ">
-          <div className="text-center hidden lg:block w-1/2 pt-20 ml-[-100px]">
-            <p className="text-[70px] font-bold dark:text-neutral-100 ">FIND YOUR</p>
-
-            <div className="leading-[1]">
-              <p className="text-[70px] font-bold italic text-transparent bg-clip-text bg-gradient-to-b from-orange-600 to-orange-300">
-                CODING
-              </p>
-              <p className="text-[70px] font-bold italic text-transparent bg-clip-text bg-gradient-to-t from-orange-600 to-orange-300">
-                BUDDY
-              </p>
-            </div>
+      <div className="min-h-screen nbg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-30">
+        <div className="min-h-screen flex justify-around ">
+          <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 ">
+            <p className="p-4 font-bold">
+              <ReactTyped
+                strings={["Connect"]}
+                typeSpeed={70}
+                backSpeed={60}
+                showCursor={false}
+              />
+            </p>
+            <p className="p-4 font-bold">
+              <ReactTyped
+                strings={["Code"]}
+                typeSpeed={70}
+                backSpeed={60}
+                showCursor={false}
+              />
+            </p>
+            <p className="p-4 font-bold">
+              <ReactTyped
+                strings={["Collaborate"]}
+                typeSpeed={70}
+                backSpeed={60}
+                showCursor={false}
+              />
+            </p>
+            <p className="p-4 font-bold">
+              <ReactTyped
+                strings={["Conquer"]}
+                typeSpeed={70}
+                backSpeed={60}
+                showCursor={false}
+              />
+            </p>
           </div>
-          <div className="lg: ">
+          <div className=" ">
             <UserCard user={feed[0]}></UserCard>
           </div>
         </div>

@@ -33,6 +33,7 @@ const Footer = () => {
               <span>
                 🔗 LinkedIn:
                 <a
+                  target="_blank"
                   className="text-blue-500 "
                   href="https://www.linkedin.com/in/sachin-panchal-28353924a/"
                 >

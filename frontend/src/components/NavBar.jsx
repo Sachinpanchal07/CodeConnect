@@ -30,8 +30,8 @@ const NavBar = () => {
       <div className="h-16 navbar bg-gray-900  text-white shadow-md">
         <div className="flex flex-1 items-center h-16 gap-3">
           <Link
-            to="/feed"
-            className="text-[1.2rem] sm:text-xl  md:text-2xl font-bold pl-2 sm:pl-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            to="/"
+            className="text-[1.2rem] sm:text-xl md:text-2xl font-bold pl-2 sm:pl-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
             CodeConnect
           </Link>
@@ -40,20 +40,22 @@ const NavBar = () => {
         {user ? (
           <div className="flex gap-2 pr-2 sm:pr-4">
             {user && (
-              <div className="flex flex-row">
+              
+              <div className="flex flex-row justify-center items-center">
+                <div><span  className="text-gray-300 font-semibold bg-gray-950 rounded-xl text-sm text-center py-2 px-4 mx-4">Hi, {user.firstName}</span></div>
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
                     role="button"
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-10 rounded-full ">
+                    <div className="w-10 outline-3 outline-gray-200 rounded-full ">
                       <img alt="user photo" src={user.photoUrl} />
                     </div>
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-neutral-200 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-gray-700 text-gray-300"
                   >
                     <li>
                       <Link to="/feed">Home</Link>
@@ -71,7 +73,7 @@ const NavBar = () => {
                       <Link to="/Search">Search</Link>
                     </li>
                     <li>
-                      <a onClick={handleLogout}>Logout</a>
+                      <a className="text-red-500" onClick={handleLogout}>Logout</a>
                     </li>
                   </ul>
                 </div>

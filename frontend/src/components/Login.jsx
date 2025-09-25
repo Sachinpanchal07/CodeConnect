@@ -76,18 +76,17 @@ const Login = () => {
     const cookie = document.cookie;
     if (cookie.includes("token=")) {
       // only redirect if token exists
-      navigate("/");
+      navigate("/feed");
     }
   }, [navigate]);
 
   return (
     <>
       <NavBar></NavBar>
-      <div className="flex justify-center items-center m-5 dark:text-neutral-300">
-        <div className="dark:bg-neutral-600  p-6 rounded-2xl shadow-xl w-96">
-          {/* <p className="flex justify-center text-xl font-bold dark:text-neutral-200">CodeConnect</p> */}
-          <h2 className="text-xl font-semibold  text-center mb-4">
-            {isLoginForm ? "Log in" : "Sign up"}
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 Z flex justify-center items-center ">
+        <div className="bg-gray-900 text-gray-400 p-6 rounded-2xl shadow-xl w-80  sm:w-110">
+          <h2 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-500 via-blue-300 to-cyan-300 bg-clip-text text-transparent  text-center mb-4">
+            {isLoginForm ? "Welcome Back 👋" : "Create an Account"}
           </h2>
           <form>
             {!isLoginForm && (
@@ -98,7 +97,7 @@ const Login = () => {
                     type="text"
                     placeholder="Enter first name"
                     value={firstName}
-                    className="w-full px-4 py-2 mt-1 border rounded-lg "
+                    className="w-full px-4 py-2 mt-1 border outline-gray-400 rounded-lg "
                     onChange={(e) => {
                       setFirstName(e.target.value);
                     }}
@@ -111,7 +110,7 @@ const Login = () => {
                     type="text"
                     placeholder="Enter last name"
                     value={lastName}
-                    className="w-full px-4 py-2 mt-1 border rounded-lg "
+                    className="w-full px-4 py-2 mt-1 border outline-gray-400 rounded-lg "
                     onChange={(e) => {
                       setLastName(e.target.value);
                     }}
@@ -121,12 +120,12 @@ const Login = () => {
             )}
 
             <div className="mb-4">
-              <label className="block  font-medium">Email</label>
+              <label className="block font-medium">Email</label>
               <input
                 placeholder="Enter gmail address"
                 type="email"
                 value={emailId}
-                className="w-full px-4 py-2 mt-1 border rounded-lg "
+                className="w-full px-4 py-2 mt-1 border outline-gray-400 rounded-lg "
                 onChange={(e) => {
                   setEmailId(e.target.value);
                 }}
@@ -139,7 +138,7 @@ const Login = () => {
                 placeholder="Enter password"
                 type="password"
                 value={password}
-                className="w-full px-4 py-2 mt-1 border rounded-lg"
+                className="w-full px-4 py-2 mt-1 border outline-gray-400 rounded-lg"
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
@@ -169,12 +168,12 @@ const Login = () => {
             >
               {isLoginForm ? (
                 <p>
-                  New User?{" "}
+                  <span>👉</span>New User?{" "}
                   <span className="text-blue-600 underline">SignUp here</span>
                 </p>
               ) : (
                 <p>
-                  Existing User?{" "}
+                  <span>👈</span>Existing User?{" "}
                   <span className="text-blue-600 underline">Login Here</span>
                 </p>
               )}

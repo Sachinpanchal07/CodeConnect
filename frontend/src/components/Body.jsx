@@ -43,7 +43,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className='dark:bg-neutral-800 h-screen'>
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 ">
         <NavBar></NavBar>
         <Outlet></Outlet>
         <Footer></Footer>
