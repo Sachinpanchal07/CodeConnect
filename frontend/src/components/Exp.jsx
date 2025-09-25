@@ -1,8 +1,6 @@
 import React from "react";
 
 const Exp = () => {
-
-    
   return (
     <div>
       <div

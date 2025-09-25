@@ -9,20 +9,6 @@ const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [darkMode, setDarkMode] = useState(false);
-
-  // toggle dark mode
-  // const toggleDarkMode = () => {
-  //   setDarkMode(!darkMode);
-  // };
-
-  // useEffect(() => {
-  //   if (darkMode) {
-  //     document.documentElement.classList.add("dark");
-  //   } else {
-  //     document.documentElement.classList.remove("dark");
-  //   }
-  // }, [darkMode]);
 
   // handle logout
   const handleLogout = async () => {
@@ -33,7 +19,7 @@ const NavBar = () => {
         { withCredentials: true }
       );
       dispatch(removeUser());
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       console.error(err);
     }
@@ -44,7 +30,7 @@ const NavBar = () => {
       <div className="h-16 navbar bg-gray-900  text-white shadow-md">
         <div className="flex flex-1 items-center h-16 gap-3">
           <Link
-            to="/"
+            to="/feed"
             className="text-[1.2rem] sm:text-xl  md:text-2xl font-bold pl-2 sm:pl-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
             CodeConnect
@@ -70,7 +56,7 @@ const NavBar = () => {
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-neutral-200 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200"
                   >
                     <li>
-                      <Link to="/">Home</Link>
+                      <Link to="/feed">Home</Link>
                     </li>
                     <li>
                       <Link to="/profile">Profile</Link>
@@ -99,8 +85,8 @@ const NavBar = () => {
           </div>
         ) : (
           <div className="flex gap-2">
-            <Link className="mr-2 font-semibold border text-sm text-blue-600 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">login</Link>
-            <Link className="mr-4 font-semibold text-sm white bg-blue-700 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">signup</Link>
+            <Link to="/login" className="mr-2 font-semibold border text-sm text-blue-600 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">login</Link>
+            <Link to="/login" className="mr-4 font-semibold text-sm white bg-blue-700 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">signup</Link>
           </div>
         )}
       </div>
