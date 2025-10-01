@@ -77,21 +77,21 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center mx-10 flex-wrap">
-        <div className="flex justify-center items-center m-5">
-          <div className="bg-white p-6 rounded-2xl shadow-xl w-86">
-            <h2 className="text-xl font-bold text-gray-800 text-center mb-2">
+      <div className="pt-4 pb-4 flex flex-col sm:flex-row justify-center mx-auto flex-wrap md:w-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-00 md:rounded-2xl hover:border-1 hover:border-blue-400 duration-300 ">
+        <div className="flex justify-center items-center m-3 bg-gray-950/50 rounded-xl">
+          <div className="p-6 rounded-2xl shadow-xl w-86">
+            <h2 className="text-xl font-bold text-gray-300 text-center mb-2">
               Edit Profile
             </h2>
             <form>
               <div className="mb-2">
-                <label className="block text-gray-700 font-medium">
+                <label className="block text-gray-300 font-medium">
                   First Name
                 </label>
                 <input
                   type="text"
                   value={firstName}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
                   onChange={(e) => {
                     setFirstName(e.target.value);
                   }}
@@ -99,13 +99,13 @@ const EditProfile = ({ user }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
+                <label className="block text-sm text-gray-300 font-medium">
                   Last Name
                 </label>
                 <input
                   type="text"
                   value={lastName}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
                   onChange={(e) => {
                     setLastName(e.target.value);
                   }}
@@ -113,13 +113,13 @@ const EditProfile = ({ user }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
+                <label className="block text-sm text-gray-300 font-medium">
                   Photo Url
                 </label>
                 <input
                   type="text"
                   value={photoUrl}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 "
                   onChange={(e) => {
                     setPhotoUrl(e.target.value);
                   }}
@@ -127,13 +127,13 @@ const EditProfile = ({ user }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
+                <label className="block text-sm text-gray-300 font-medium">
                   age
                 </label>
                 <input
                   type="text"
                   value={age}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
                   onChange={(e) => {
                     setAge(e.target.value);
                   }}
@@ -143,23 +143,23 @@ const EditProfile = ({ user }) => {
               <div className="mb-2">
                 <label
                   htmlFor="skills"
-                  className="block text-sm text-gray-700 font-medium"
+                  className="block text-sm text-gray-300 font-medium"
                 >
                   Skill
                 </label>
                 <select
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 "
                   id="skills"
                   name="skills"
                   onChange={(e) => setSkills((prev)=>[...prev, e.target.value])}
                 >
-                  <option className="w-full px-4 py-1 mt-1 border rounded-lg " value="">
+                  <option className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 bg-gray-900" value="">
                     Select Skill
                   </option>
                   {skillData.map((skill, index) => {
                     return (
                       <option
-                        className="w-full px-4 py-1 mt-1 border rounded-lg"
+                        className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 bg-gray-900"
                         key={index}
                         value={skill}
                       >
@@ -168,24 +168,16 @@ const EditProfile = ({ user }) => {
                     );
                   })}
                 </select>
-                {/* <input
-                  type="text"
-                  value={skills.map((skill)=>skill)}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg"
-                  onChange={(e) => {
-                    setSkills([e.target.value]);
-                  }}
-                /> */}
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
+                <label className="block text-sm text-gray-300 font-medium">
                   Gender
                 </label>
                 <input
                   type="text"
                   value={gender}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border text-gray-400 border-gray-400 rounded-lg "
                   onChange={(e) => {
                     setGender(e.target.value);
                   }}
@@ -193,13 +185,13 @@ const EditProfile = ({ user }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block text-sm text-gray-700 font-medium">
+                <label className="block text-sm text-gray-300 font-medium">
                   About
                 </label>
-                <input
+                <textarea
                   type="text"
                   value={about}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg "
+                  className="w-full px-4 py-1 mt-1 border text-gray-400 border-gray-400  rounded-lg "
                   onChange={(e) => {
                     setAbout(e.target.value);
                   }}

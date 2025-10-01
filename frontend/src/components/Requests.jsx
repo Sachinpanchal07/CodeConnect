@@ -40,14 +40,14 @@ const Requests = () => {
 
     if(!requests)return;
     if(requests.length === 0){
-        return (<p className="py-60  text-center text-xl md:text-2xl">No Connections Requests Found !!</p>)
+        return (<p className="py-60 text-white text-center text-xl md:text-2xl">No Connections Requests Found !!</p>)
     }
 
   return (
     <div className='min-h-screen flex flex-wrap justify-evenly flex-start'>
       {
         requests.map((request,index)=>{
-            return (
+            return ( 
                 <RequestCard key={index} request={request.fromUserId} reviewRequest={reviewRequest} requestId={request._id}></RequestCard>
             )
         })

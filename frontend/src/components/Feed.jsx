@@ -11,6 +11,8 @@ import { useState } from "react";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
+  const [showEffect, setShowEffect] = useState(0);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cookie = document.cookie;
@@ -59,39 +61,13 @@ const Feed = () => {
     feed && (
       <div className="min-h-screen nbg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-30">
         <div className="min-h-screen flex justify-around ">
-          <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 ">
-            <p className="p-4 font-bold">
-              <ReactTyped
-                strings={["Connect"]}
-                typeSpeed={70}
-                backSpeed={60}
-                showCursor={false}
-              />
-            </p>
-            <p className="p-4 font-bold">
-              <ReactTyped
-                strings={["Code"]}
-                typeSpeed={70}
-                backSpeed={60}
-                showCursor={false}
-              />
-            </p>
-            <p className="p-4 font-bold">
-              <ReactTyped
-                strings={["Collaborate"]}
-                typeSpeed={70}
-                backSpeed={60}
-                showCursor={false}
-              />
-            </p>
-            <p className="p-4 font-bold">
-              <ReactTyped
-                strings={["Conquer"]}
-                typeSpeed={70}
-                backSpeed={60}
-                showCursor={false}
-              />
-            </p>
+          <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 hidden lg:block">
+            
+            <p className="mb-8 font-bold">Connect</p>
+            <p className="mb-8 font-semibold">Code</p>
+            <p className="mb-8 font-bold">Colleborate</p>
+            <p className="mb-8 font-semibold">Conquer</p>
+            
           </div>
           <div className=" ">
             <UserCard user={feed[0]}></UserCard>

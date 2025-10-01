@@ -73,7 +73,7 @@ const NavBar = () => {
                       <Link to="/Search">Search</Link>
                     </li>
                     <li>
-                      <a className="text-red-500" onClick={handleLogout}>Logout</a>
+                      <a className="text-red-500 font-semibold" onClick={handleLogout}>Logout</a>
                     </li>
                   </ul>
                 </div>
