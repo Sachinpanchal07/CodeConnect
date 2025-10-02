@@ -14,6 +14,7 @@ import Premium from "./components/Premium";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
+import ViewConnection from "./components/ViewConnection";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route> 
             <Route path="/profile" element={<Profile></Profile>}></Route> 
             <Route path="/connections" element={<Connections></Connections>}></Route> 
+            <Route path="/view/connection/:connectionId" element={<ViewConnection></ViewConnection>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route> 
             <Route path="/search" element={<SearchUsers></SearchUsers>}></Route>
             <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>

@@ -51,7 +51,7 @@ const Feed = () => {
   if (!feed) return;
   if (feed.length === 0) {
     return (
-      <p className="h-screen flex justify-center text-xl pt-40 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
+      <p className="min-h-screen text-xl sm:text-2xl md:text-3xl text-center text-gray-300 pt-50">
         No new users found !
       </p>
     );
