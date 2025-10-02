@@ -137,5 +137,21 @@ userRouter.post("/user/search", userAuth, async (req, res) => {
 });
 
 
+// View Connection 
+
+userRouter.get("/connection/:id", userAuth, async (req, res) =>{
+    const { id } = req.params;
+    try{
+        if(!id) return res.status(400).json({ message: "Bad Request: Pass Id in URL" });    
+        const user = await User.findById(id);
+        if(!user) return res.status(404).json({ message: "User Not Found" });
+        res.status(200).json({user});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ message:"server error" });
+    }
+});
+
+
 
 module.exports = userRouter;
