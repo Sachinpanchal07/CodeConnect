@@ -37,7 +37,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res)=>{
     });
 
   }catch(err){
-    res.status(500).send("ERRRO: " + err.message);
+    res.status(500).send(err.message);
   }
 });
 

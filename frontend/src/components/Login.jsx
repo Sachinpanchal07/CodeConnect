@@ -37,7 +37,7 @@ const Login = () => {
       // console.log(res);
       return navigate("/feed");
     } catch (err) {
-      setError(err?.response?.data || "something went wrong");
+      setError(err?.response?.data || "Something went wrong !");
     } finally {
       setLoading(false);
     }

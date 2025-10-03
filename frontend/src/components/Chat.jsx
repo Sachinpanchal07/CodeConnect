@@ -36,7 +36,7 @@ const Chat = () => {
 
     socket.emit("joinChat", { userId, targetUserId });
 
-    // write this "messageRecevied" event in usedEffect.
+    // write this "messageRecevied" event in useEffect.
     socket.on("messageReceived", ({ firstName, text }) => {
       console.log(firstName + ": " + " " + text);
       setMessages((prev) => [...prev, { firstName, text }]);
@@ -64,7 +64,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex w-full h-full justify-center mt-10">
+    <div className="flex w-full h-full justify-center pt-20 pb-5">
       <div className="flex flex-col h-[500px] w-[700px] bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden">
         <div className="bg-gray-800 px-4 py-3 flex items-center justify-between  border-b border-gray-700">
           <h2 className="font-semibold text-lg">Chat</h2>
@@ -76,7 +76,7 @@ const Chat = () => {
             return (
               <div
                 key={index}
-                className={"chat " + (isMe ? "chat-end" : "chat-star ")}
+                className={"chat " + (isMe ? "chat-end" : "chat-start ")}
               >
                 <div className="chat-header text-gray-400">{msg.firstName}</div>
                 <div

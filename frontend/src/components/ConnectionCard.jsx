@@ -1,10 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { removeFromRequests } from "../utils/allRequestsSlice";
-import { removeConnections } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
 
 const ConnectionCard = ({ connection }) => {
@@ -22,7 +16,7 @@ const ConnectionCard = ({ connection }) => {
           <img
             src={photoUrl}
             alt={`${firstName} ${lastName}`}
-            className="w-10 h-10 rounded-full object-cover border-4 border-white shadow-md"
+            className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
           />
           <h2 className="text-md font text-white ">
             {firstName} {lastName}

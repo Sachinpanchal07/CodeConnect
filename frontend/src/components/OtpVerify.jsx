@@ -59,14 +59,14 @@ function OtpVerify() {
     // }
 
   return (
-    <div className='flex justify-center items-center min-h-screen dark:text-neutral-300'>
-        <div className='dark:bg-neutral-600 p-6 rounded-2xl shadow-xl w-96'>
+    <div className='flex justify-center items-center min-h-screen '>
+        <div className='p-6 mx-2 rounded-2xl shadow-xl w-96 bg-gray-700'>
             {/* <div>
                 <h2 className='text-xl font-semibold text-center mb-4'>Verify OTP</h2>
                 <span><CountDown date={Date.now() + 30000}></CountDown></span>
             </div> */}
            
-            <p className='text-sm text-center mb-4'>
+            <p className='text-sm text-center mb-4 text-gray-200'>
                 We have sent a 6 digit OTP to <span className='font-medium'>{emailId}</span>
             </p>
 
@@ -74,7 +74,7 @@ function OtpVerify() {
                 type="text"
                 placeholder='Enter OTP'
                 value={otp}
-                className='w-full px-4 py-2 mb-4 border rounded-lg text-center tracking-widest'
+                className='text-gray-200 w-full px-4 py-2 mb-4 border border-gray-400 rounded-lg text-center tracking-widest'
                 maxLength={6}
                 onChange={(e)=>setOtp(e.target.value)}
             />
@@ -89,7 +89,7 @@ function OtpVerify() {
                 {loading ? <BeatLoader/> : "verify OTP"}
             </button>
 
-            <p className='text-center'>
+            <p className='text-center text-gray-300'>
                 Didn't get OTP ? {" "}
                 <span onClick={handleResendOtp} className='text-blue-400 cursor-pointer hover:underline'>Resend</span>
             </p>

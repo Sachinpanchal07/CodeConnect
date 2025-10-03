@@ -4,7 +4,7 @@ const userRouter = express.Router();
 const ConnectionRequest = require("../models/connectionRequst")
 const User = require("../models/user");
 
-const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills";
+const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills isPremium";
 
 // connection req received 
 userRouter.get("/user/requests/received", userAuth, async (req, res)=>{
@@ -16,7 +16,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res)=>{
         }).populate("fromUserId", ["firstName", "lastName", "photoUrl", "age", "gender", "about", "skills"]);
         // here we use "fromUserId" reference to fetch the info of "User" Model  using "populate"
 
-        res.json({
+        res.status(200).json({
             message: "Date fetch successfully",
             connectionRequests,
         });

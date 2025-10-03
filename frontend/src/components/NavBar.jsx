@@ -57,6 +57,13 @@ const NavBar = () => {
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-gray-700 text-gray-300"
                   >
                     <li>
+                      {!user.isPremium && (
+                  <div className="text-orange-500   font-bold">
+                    <Link to="/premium">Premium</Link>
+                  </div>
+                )}
+                    </li>
+                    <li>
                       <Link to="/feed">Home</Link>
                     </li>
                     <li>
@@ -76,11 +83,6 @@ const NavBar = () => {
                     </li>
                   </ul>
                 </div>
-                {!user.isPremium && (
-                  <div className="px-5 py-2 cursor-pointer mx-2 bg-gradient-to-r from-yellow-500 via-orange-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:via-orange-600 hover:to-amber-700 transition duration-300">
-                    <Link to="/premium">Premium</Link>
-                  </div>
-                )}
               </div>
             )}
           </div>

@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
-  const [showEffect, setShowEffect] = useState(0);
+  // const [showEffect, setShowEffect] = useState(0);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Feed = () => {
   if (!feed) return;
   if (feed.length === 0) {
     return (
-      <p className="min-h-screen text-xl sm:text-2xl md:text-3xl text-center text-gray-300 pt-50">
+      <p className="min-h-screen text-xl sm:text-2xl text-center text-gray-300 pt-50">
         No new users found !
       </p>
     );
