@@ -62,6 +62,7 @@ const Login = () => {
         dispatch(addUser(res.data.data));
         return navigate("/profile");
       } else {
+        console.log("i'm in login page with navigate")
         navigate("/verify-otp", { state: { emailId } });
       }
     } catch (err) {
@@ -88,7 +89,7 @@ const Login = () => {
           <h2 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-500 via-blue-300 to-cyan-300 bg-clip-text text-transparent  text-center mb-4">
             {isLoginForm ? "Welcome Back 👋" : "Create an Account"}
           </h2>
-          <form>
+          <div>
             {!isLoginForm && (
               <>
                 <div className="mb-4">
@@ -178,7 +179,7 @@ const Login = () => {
                 </p>
               )}
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <Footer></Footer>

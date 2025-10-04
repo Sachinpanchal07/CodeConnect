@@ -26,14 +26,16 @@ const RequestCard = ({ request, reviewRequest, requestId }) => {
             />
           </figure>
           <div>
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              {firstName + " " + lastName}
-              {isPremium && (
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
-                  ✓
-                </span>
-              )}
-            </h2>
+            <div className="flex">
+              <h2 className="text-2xl font-bold flex items-center gap-2">
+                {firstName + " " + lastName}
+              </h2>
+                {isPremium && (
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
+                    ✓
+                  </span>
+                )}
+            </div>
 
             <div className="mt-3">
               <div className="text-sm text-gray-300">

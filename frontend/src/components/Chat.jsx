@@ -64,13 +64,18 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex w-full h-full justify-center pt-20 pb-5">
-      <div className="flex flex-col h-[500px] w-[700px] bg-gray-900 text-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="flex w-full h-full sm:px-4 justify-center pt-20 pb-5">
+      <div className="flex flex-col h-[500px] w-[700px] bg-gray-900 text-white sm:rounded-xl shadow-lg overflow-hidden">
         <div className="bg-gray-800 px-4 py-3 flex items-center justify-between  border-b border-gray-700">
           <h2 className="font-semibold text-lg">Chat</h2>
           <span className="text-sm text-gray-400">Online</span>
         </div>
-        <div className="flex-1 p-4 space-y-3 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700">
+        <div
+          className="flex-1 p-4 space-y-3 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700"
+          style={{
+            backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTGngzEmvbo46fJUXFkf4LGQ1AMgMwt9fmQ&s')",
+          }}
+        >
           {messages?.map((msg, index) => {
             const isMe = user.firstName === msg.firstName;
             return (
@@ -78,11 +83,11 @@ const Chat = () => {
                 key={index}
                 className={"chat " + (isMe ? "chat-end" : "chat-start ")}
               >
-                <div className="chat-header text-gray-400">{msg.firstName}</div>
+                <div className="chat-header text-gray-200">{msg.firstName}</div>
                 <div
                   className={
                     "chat-bubble " +
-                    (isMe ? "bg-blue-500 text-white" : "bg-gray-300")
+                    (isMe ? "bg-black text-white" : "bg-gray-300")
                   }
                 >
                   {msg.text}
@@ -92,7 +97,6 @@ const Chat = () => {
           })}
         </div>
 
-        {/* Input area */}
         <div className="bg-gray-800 p-3 border-t border-gray-700 flex items-center gap-2">
           <input
             value={newMessage}

@@ -58,7 +58,7 @@ const NavBar = () => {
                   >
                     <li>
                       {!user.isPremium && (
-                  <div className="text-orange-500   font-bold">
+                  <div className="text-orange-500 font-bold">
                     <Link to="/premium">Premium</Link>
                   </div>
                 )}

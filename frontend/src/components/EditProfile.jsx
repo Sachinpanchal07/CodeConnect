@@ -20,6 +20,7 @@ const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
   const [skills, setSkills] = useState(user.skills || []);
   const [skillData, setSkillData] = useState([]);
+  const isPremium = user.isPremium;
 
   // save profile
   const saveProfile = async () => {
@@ -39,6 +40,7 @@ const EditProfile = ({ user }) => {
         { withCredentials: true }
       );
 
+      console.log(res)
       toast.success("Profile updated successfully");
       dispatch(addUser(res?.data?.data));
     } catch (err) {
@@ -210,7 +212,7 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
         <EditProfileCard
-          user={{ firstName, lastName, photoUrl, age, gender, about, skills }}
+          user={{ firstName, lastName, photoUrl, age, gender, about, skills, isPremium }}
         ></EditProfileCard>
       </div>
     </>

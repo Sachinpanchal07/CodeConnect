@@ -54,7 +54,7 @@ const Connections = () => {
       {loading ? (
         <BeatLoader className="min-h-screen pt-50 text-center" />
       ) : (
-        <div className="min-h-screen pt-25 bg-gray-950/50">
+        <div className="min-h-screen pt-25">
           <div className="min-h-[500px] flex flex-col w-full sm:w-2xl bg-gray-800 mx-auto sm:rounded-md p-1">
             {connections.map((connection, index) => (
               <ConnectionCard

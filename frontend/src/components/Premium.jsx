@@ -62,9 +62,9 @@ const Premium = () => {
   };
 
   return (
-    <div>
-      <div className="flex gap-6 justify-center mt-10">
-        <div className="bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 text-white rounded-xl shadow-lg p-6 w-100">
+    <div className="pt-20 min-h-screen" style={{backgroundImage:"url('')"}}>
+      <div className="flex gap-6 justify-center mt-10" >
+        <div className="md:w-[600px]  bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 text-white rounded-xl  transition-transform hover:scale-102 ease-in-out duration-500 shadow-lg p-6 w-100">
           <h2 className="text-xl font-bold text-center mb-3">
             Gold Membership
           </h2>

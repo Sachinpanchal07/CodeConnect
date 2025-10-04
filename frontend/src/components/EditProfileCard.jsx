@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const EditProfileCard = ({ user }) => {
-  const { firstName, lastName, photoUrl, age, gender, about, skills } = user;
+  const { firstName, lastName, photoUrl, age, gender, about, skills, isPremium } = user;
   const data = useSelector((store)=>store.user);
   const allSkills = data.skills;
 
@@ -16,9 +16,16 @@ const EditProfileCard = ({ user }) => {
           />
         </figure>
         <div className="p-5">
-          <h2 className="text-xl font-bold mb-1 bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-            {firstName + " " + lastName}
-          </h2>
+          <div className="flex items-center gap-2">
+              <h2 className="text-2xl bg-gradient-to-br from-blue-500 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-bold flex items-center gap-2">
+                {firstName + " " + lastName}
+              </h2>
+                {isPremium && (
+                  <span className="flex items-center justify-center mt-1 w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
+                    ✓
+                  </span>
+                )}
+            </div>
           {age && gender && (
             <p className="text-gray-300 text-sm mb-2">{age + ", " + gender}</p>
           )}
