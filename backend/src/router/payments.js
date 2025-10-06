@@ -46,7 +46,7 @@ paymentRouter.post("/payment/create", userAuth, async (req, res) => {
   }
 });
 
-// webhook API for razorpay to call for verification. (#Runs when app is deployed)
+// webhook API for razorpay to call for verification. ( # Will Run when app is deployed )
 paymentRouter.post("/payment/webhook", async (req, res) => {
   try {
     const webhookSignature = req.header("X-Razorpay-Signature");

@@ -60,7 +60,7 @@ const Feed = () => {
   return (
     feed && (
       <div className="min-h-screen nbg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-30">
-        <div className="min-h-screen flex justify-around ">
+        <div className="min-h-screen flex justify-around md:px-40">
           <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 hidden lg:block">
             
             <p className="mb-8 font-bold">Connect</p>
@@ -69,7 +69,7 @@ const Feed = () => {
             <p className="mb-8 font-semibold">Conquer</p>
             
           </div>
-          <div className=" ">
+          <div className="">
             <UserCard user={feed[0]}></UserCard>
           </div>
         </div>

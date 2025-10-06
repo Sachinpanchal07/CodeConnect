@@ -34,14 +34,35 @@ const NavBar = () => {
           >
             CodeConnect
           </Link>
+          {user && (
+            <ul className="text-md hidden lg:flex text-blue-500 font-semibold mx-auto">
+              <li className="p-5 cursor-pointer"><Link to="/feed">Home</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/profile">Profile</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/Connections">Connections</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/requests">Requests</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/Search">Search</Link></li>
+              {/* <li className="p-5 cursor-pointer text-red-500">Logout</li> */}
+              {/* <li className="p-5 cursor-pointer text-orange-500"> Premium</li> */}
+              <li>
+                {!user.isPremium && (
+                  <div className="text-orange-500 font-bold p-5">
+                    <Link to="/premium">Premium</Link>
+                  </div>
+                )}
+              </li>
+            </ul>
+          )}
         </div>
 
         {user ? (
           <div className="flex gap-2 pr-2 sm:pr-4">
             {user && (
-              
               <div className="flex flex-row justify-center items-center">
-                <div><span  className="text-gray-300 font-semibold bg-gray-950 rounded-xl text-sm text-center py-2 px-4 mx-4">Hi, {user.firstName}</span></div>
+                <div>
+                  <span className="text-gray-300 font-semibold bg-gray-950 rounded-xl text-sm text-center py-2 px-4 mx-4">
+                    Hi, {user.firstName}
+                  </span>
+                </div>
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
@@ -57,11 +78,24 @@ const NavBar = () => {
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-gray-700 text-gray-300"
                   >
                     <li>
+                      <a
+                        className="text-red-500 font-semibold"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                  <ul
+                    tabIndex={0}
+                    className="menu lg:hidden menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow bg-gray-700 text-gray-300"
+                  >
+                    <li>
                       {!user.isPremium && (
-                  <div className="text-orange-500 font-bold">
-                    <Link to="/premium">Premium</Link>
-                  </div>
-                )}
+                        <div className="text-orange-500 font-bold">
+                          <Link to="/premium">Premium</Link>
+                        </div>
+                      )}
                     </li>
                     <li>
                       <Link to="/feed">Home</Link>
@@ -79,7 +113,12 @@ const NavBar = () => {
                       <Link to="/Search">Search</Link>
                     </li>
                     <li>
-                      <a className="text-red-500 font-semibold" onClick={handleLogout}>Logout</a>
+                      <a
+                        className="text-red-500 font-semibold"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -88,8 +127,18 @@ const NavBar = () => {
           </div>
         ) : (
           <div className="flex gap-2">
-            <Link to="/login" className="mr-2 font-semibold border text-sm text-blue-600 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">login</Link>
-            <Link to="/login" className="mr-4 font-semibold text-sm white bg-blue-700 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none ">signup</Link>
+            <Link
+              to="/login"
+              className="mr-2 font-semibold border text-sm text-blue-600 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none "
+            >
+              login
+            </Link>
+            <Link
+              to="/login"
+              className="mr-4 font-semibold text-sm white bg-blue-700 rounded-sm py-1 px-4 transition-transform hover:scale-105 ease-in-out duration-300 hover:bg-none "
+            >
+              signup
+            </Link>
           </div>
         )}
       </div>

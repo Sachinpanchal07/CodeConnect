@@ -1,25 +1,34 @@
 // console.log(process.env)
 require('dotenv').config()
 const express = require("express");
-const {connectDB} = require("./config/database");
+const {connectDB} = require("./src/config/database");
 const app = express();
 const cookieParser = require("cookie-parser");
 const http = require("http");
-const initializeSocket = require("./utils/socket.js");
+const initializeSocket = require("./src/utils/socket.js");
 
 // for web socket
 const server = http.createServer(app);
 initializeSocket(server);
 
 // import the routers and use them
-const authRouter = require("./router/auth.js");
-const requestRouter = require("./router/request.js");
-const profileRouter = require("./router/profile.js");
-const userRouter = require("./router/user.js");
-const paymentRouter = require("./router/payments.js");
-const chatRouter = require("./router/chat.js");
+// const authRouter = require("./router/auth.js");
+// const requestRouter = require("./router/request.js");
+// const profileRouter = require("./router/profile.js");
+// const userRouter = require("./router/user.js");
+// const paymentRouter = require("./router/payments.js");
+// const chatRouter = require("./router/chat.js");
+// const cors = require("cors");
+// require("./utils/cronjob");
+
+const authRouter = require("./src/router/auth.js");
+const requestRouter = require("./src/router/request.js");
+const profileRouter = require("./src/router/profile.js");
+const userRouter = require("./src/router/user.js");
+const paymentRouter = require("./src/router/payments.js");
+const chatRouter = require("./src/router/chat.js");
 const cors = require("cors");
-require("./utils/cronjob");
+require("./src/utils/cronjob");
 
 app.use(cors({
   origin:"http://localhost:5173",
@@ -38,14 +47,13 @@ app.use("/", userRouter)
 app.use("/", paymentRouter)
 app.use("/", chatRouter)
 
-// const port = process.env.PORT;
-
+const port = process.env.PORT;
 
 connectDB().then(()=>{
   console.log("database connected successfully");
   // when db is connected then the app.listen starting accepting the request.
   // best way to connect to db.
-  server.listen(3000, () => { 
+  server.listen(port, () => { 
     console.log("server is listening at port 3000");
   });
 })
