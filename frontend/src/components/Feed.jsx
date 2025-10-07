@@ -26,20 +26,21 @@ const Feed = () => {
         withCredentials: true,
       });
       dispatch(addFeed(res?.data?.data));
+      // console.log(res);
     } catch (err) {
       console.error(err);
       toast.error(err?.message);
     }
   };
 
-  const arr = ["Connect", "Code", "Collaborate", "Conquer"];
-  const [idx, setIdx] = useState(0);
-  useEffect(()=>{
-    setInterval(()=>{
-        const interval = setIdx(()=> idx % arr.length + 1)
-        return ()=>clearInterval(interval)
-    }, 1000)
-  })
+  // const arr = ["Connect", "Code", "Collaborate", "Conquer"];
+  // const [idx, setIdx] = useState(0);
+  // useEffect(()=>{
+  //   setInterval(()=>{
+  //       const interval = setIdx(()=> idx % arr.length + 1)
+  //       return ()=>clearInterval(interval)
+  //   }, 1000)
+  // })
 
   useEffect(() => {
     if (cookie) {
@@ -60,7 +61,7 @@ const Feed = () => {
   return (
     feed && (
       <div className="min-h-screen nbg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-30">
-        <div className="min-h-screen flex justify-around md:px-40">
+        <div className="min-h-screen flex justify-around ">
           <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 hidden lg:block">
             
             <p className="mb-8 font-bold">Connect</p>

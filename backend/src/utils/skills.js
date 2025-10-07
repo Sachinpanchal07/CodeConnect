@@ -1,12 +1,12 @@
 const Skills = [
     "HTML & CSS",
-    "JavaScript (ES6+)",
+    "JavaScript",
     "Responsive Design",
     "React.js",
     "Node.js & Express",
-    "MongoDB (or SQL)",
+    "MongoDB",
     "RESTful APIs"
   ];
 
-module.exports = {Skills} ;
+module.exports = {Skills};
   

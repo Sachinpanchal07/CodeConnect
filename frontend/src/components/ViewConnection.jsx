@@ -83,8 +83,8 @@ const ViewConnection = () => {
       {loading ? (
         <BeatLoader className="pt-50 text-center min-h-screen"></BeatLoader>
       ) : (
-        <div className="min-h pt-25 pb-10 px-3 bg-gray-800 text-white">
-          <div className="min-h-[400px] flex flex-col w-full rounded-2xl sm:w-2xl bg-gray-950/50 mx-auto p-5 sm:p-8 sm:rounded">
+        <div className="min-h-screen pt-25 sm:pt-35 pb-10 px-3 rounded-2xl bg-gray-800 text-white">
+          <div className="min-h-[400px] flex flex-col w-full rounded-2xl sm:w-2xl bg-gray-950/50 mx-auto p-5 sm:p-8 sm:rounded-md">
             <section className="flex flex-col sm:flex-row gap-12">
               <figure className="flex-shrink-0 ">
                 <img

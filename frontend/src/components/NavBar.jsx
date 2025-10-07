@@ -36,11 +36,11 @@ const NavBar = () => {
           </Link>
           {user && (
             <ul className="text-md hidden lg:flex text-blue-500 font-semibold mx-auto">
-              <li className="p-5 cursor-pointer"><Link to="/feed">Home</Link></li>
-              <li className="p-5 cursor-pointer"><Link to="/profile">Profile</Link></li>
-              <li className="p-5 cursor-pointer"><Link to="/Connections">Connections</Link></li>
-              <li className="p-5 cursor-pointer"><Link to="/requests">Requests</Link></li>
-              <li className="p-5 cursor-pointer"><Link to="/Search">Search</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/feed" className="hover:text-blue-300">Home</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/profile" className="hover:text-blue-300">Profile</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/Connections" className="hover:text-blue-300">Connections</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/requests" className="hover:text-blue-300">Requests</Link></li>
+              <li className="p-5 cursor-pointer"><Link to="/Search" className="hover:text-blue-300">Search</Link></li>
               {/* <li className="p-5 cursor-pointer text-red-500">Logout</li> */}
               {/* <li className="p-5 cursor-pointer text-orange-500"> Premium</li> */}
               <li>

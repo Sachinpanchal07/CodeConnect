@@ -33,6 +33,7 @@ const UserCard = ({ user }) => {
       dispatch(removeUserFromFeed(userId));
       dispatch(removeSearchUser(userId));
       if (status == "interested") toast.success("Request sent");
+
     } catch (err) {
       console.error(err.message);
       toast.error(err?.response?.data?.message);
@@ -41,7 +42,7 @@ const UserCard = ({ user }) => {
 
   return (
     <div className="flex justify-center m-6">
-      <div className="w-80 text-gray-300 bg-gray-900/70 p-8 rounded-xl shadow-xl transition-transform duration-500 ease-in-out hover:scale-103 ">
+      <div className="w-80 sm:w-160 sm:flex text-gray-300 bg-gray-900/70 p-5 rounded-xl shadow-xl transition-transform duration-500 ease-in-out hover:scale-103 ">
         {/* Image */}
         <figure className="rounded-xl overflow-hidden">
           <img
@@ -52,8 +53,8 @@ const UserCard = ({ user }) => {
         </figure>
 
         {/* Content */}
-        <div className="pt-4 ">
-          <h2 className="text-2xl flex items-center gap-2 font-bold mb-1 py-3  bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+        <div className="pt-y sm:py-0 sm:px-4">
+          <h2 className="text-2xl flex items-center gap-2 font-bold mb-1 py-3 sm:p-0  bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent">
             {firstName + " " + lastName}
             {isPremium && (
               <span className="flex items-center justify-center mt-1 w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
@@ -67,8 +68,11 @@ const UserCard = ({ user }) => {
           )}
 
           {skills?.length > 0 && (
-            <p className="text-sm font-bold mb-2">
-              Skills: <span className="font-medium ">{skills.join(" | ")}</span>
+            <p className="text-sm font-semibold">
+              {/* Skills: <span className="font-medium ">{skills.join(" | ")}</span> */}
+              {skills.map((skill, index) => (
+                <button key={index} className="bg-gradient-to-r from-blue-700 to-cyan-700 via-purple-700  m-1 px-2 rounded-full">{skill}</button>
+              ) )}
             </p>
           )}
 
