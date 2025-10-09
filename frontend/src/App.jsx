@@ -6,7 +6,7 @@ import appStore from "./utils/appStore";
 import { Provider } from "react-redux";
 import Feed from "./components/Feed";
 import Connections from "./components/Connections";
-import Requests from "./components/requests";
+import Requests from "./components/Requests";
 import { ToastContainer } from 'react-toastify';
 import SearchUsers from "./components/SearchUsers";
 import OtpVerify from "./components/OtpVerify";
