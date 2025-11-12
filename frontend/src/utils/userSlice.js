@@ -13,6 +13,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { addUser, removeUser } = userSlice.actions;
-export default userSlice.reducer;
+export const { addUser, removeUser } = userSlice.actions; // used in diff components for update the state
+export default userSlice.reducer; // used in the redux store.
 

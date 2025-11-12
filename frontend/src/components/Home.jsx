@@ -27,10 +27,11 @@ function Home() {
     "👨‍💻 Find your perfect dev match!",
     "💬 Network with like-minded devs.",
   ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % lines.length);
-    }, 2000);
+    }, 1500);
     return () => clearInterval(interval);
   }, [lines.length]);
 
@@ -75,7 +76,7 @@ function Home() {
                   Why Choose CodeConnect ?
                 </h1>
             
-              <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
                 <div className=" p-6 border bg-gray-800 border-gray-600 rounded-2xl  transition-transform duration-500 ease-out hover:scale-105 ">
                   <div className="text-4xl mb-4">👥</div>
                   <h3 className="text-xl mb-2 font-bold">

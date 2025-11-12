@@ -71,7 +71,7 @@ const UserCard = ({ user }) => {
             <p className="text-sm font-semibold">
               {/* Skills: <span className="font-medium ">{skills.join(" | ")}</span> */}
               {skills.map((skill, index) => (
-                <button key={index} className="bg-gradient-to-r from-blue-700 to-cyan-700 via-purple-700  m-1 px-2 rounded-full">{skill}</button>
+                <button key={index} className="text-white italic font-normal bg-gradient-to-r from-blue-500 to-purple-500  m-1 px-2 pb-0.5 rounded-full">{skill}</button>
               ) )}
             </p>
           )}

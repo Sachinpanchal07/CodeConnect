@@ -34,6 +34,7 @@ authRouter.post("/signup", async (req, res) => {
         otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
+      
       // send otp mail
       const info = await sendOTP(emailId, otp);
 
@@ -62,7 +63,7 @@ authRouter.post("/login", async (req, res) => {
       }
       if(user){
         const token = user.getJWT();
-        res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)}); // we can also expires cookies
+        res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)}); 
         res.send(user);
       }
       else{

@@ -33,7 +33,7 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data));
       // console.log(res);
       return navigate("/feed");
     } catch (err) {
@@ -62,7 +62,7 @@ const Login = () => {
         dispatch(addUser(res.data.data));
         return navigate("/profile");
       } else {
-        console.log("i'm in login page with navigate")
+        // console.log("i'm in login page with navigate")
         navigate("/verify-otp", { state: { emailId } });
       }
     } catch (err) {
@@ -93,7 +93,7 @@ const Login = () => {
             {!isLoginForm && (
               <>
                 <div className="mb-4">
-                  <label className="block  font-medium">First Name</label>
+                  <label className="block font-medium">First Name</label>
                   <input
                     type="text"
                     placeholder="Enter first name"

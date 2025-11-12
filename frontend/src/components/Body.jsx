@@ -13,13 +13,13 @@ const Body = () => {
   const navigate = useNavigate();
   const cookie = document.cookie;
 
-  // fetch user data on first render
-  const fetchUser = async ()=>{ // if user is loggedIn then go furthur else redirected to login page.
+  // User data on first render
+  const fetchUser = async ()=>{ 
     try{
-      const res = await axios.get(BASE_URL + "/profile/view",{withCredentials:true});
-      dispatch(addUser(res.data));
+      const res = await axios.get(BASE_URL + "/profile/view", {withCredentials:true});
+      dispatch(addUser(res?.data));
     }catch(err){
-      if(err.response?.status === 401){ // server sends status 401 when token not found in backend
+      if(err.response?.status === 401){ // token not found(401)
         navigate("/login");
       }
     }

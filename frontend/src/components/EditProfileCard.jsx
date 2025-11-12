@@ -30,8 +30,11 @@ const EditProfileCard = ({ user }) => {
             <p className="text-gray-300 text-sm mb-2">{age + ", " + gender}</p>
           )}
           {skills?.length > 0 && (
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-semibold">skillls : </span> {allSkills.join(" | ")}
+            <p className="text-sm font-semibold">
+              {/* Skills: <span className="font-medium ">{skills.join(" | ")}</span> */}
+              {skills.map((skill, index) => (
+                <button key={index} className="text-white italic font-normal bg-gradient-to-r from-blue-500 to-purple-500  m-1 px-2 pb-0.5 rounded-full">{skill}</button>
+              ) )}
             </p>
           )}
           <p className="text-gray-300 text-sm mb-4 leading-relaxed"><span className="font-semibold">About : </span>{about}</p>
