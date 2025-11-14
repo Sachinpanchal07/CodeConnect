@@ -22,7 +22,7 @@ const cors = require("cors");
 require("./src/utils/cronjob");
 
 app.use(cors({
-  origin:"http://localhost:5173" || "https://code-connect-zeta-lilac.vercel.app/",
+  origin:true, // for testing only
   credentials:true
   })
 );
