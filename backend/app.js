@@ -12,15 +12,6 @@ const server = http.createServer(app);
 initializeSocket(server);
 
 // import the routers and use them
-// const authRouter = require("./router/auth.js");
-// const requestRouter = require("./router/request.js");
-// const profileRouter = require("./router/profile.js");
-// const userRouter = require("./router/user.js");
-// const paymentRouter = require("./router/payments.js");
-// const chatRouter = require("./router/chat.js");
-// const cors = require("cors");
-// require("./utils/cronjob");
-
 const authRouter = require("./src/router/auth.js");
 const requestRouter = require("./src/router/request.js");
 const profileRouter = require("./src/router/profile.js");
@@ -31,7 +22,7 @@ const cors = require("cors");
 require("./src/utils/cronjob");
 
 app.use(cors({
-  origin:"http://localhost:5173",
+  origin:"http://localhost:5173" || "https://code-connect-zeta-lilac.vercel.app/",
   credentials:true
   })
 );
@@ -47,7 +38,7 @@ app.use("/", userRouter)
 app.use("/", paymentRouter)
 app.use("/", chatRouter)
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 connectDB().then(()=>{
   console.log("database connected successfully");
