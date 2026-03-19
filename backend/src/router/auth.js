@@ -10,11 +10,15 @@ const sendOTP = require("../utils/nodemailer.js");
 authRouter.post("/signup", async (req, res) => {
     try{
       const{firstName, lastName, emailId, password} = req.body;
+      console.log("Req.body in signup api", req.body);
 
       const isUserExist = await User.findOne({emailId});
       if(isUserExist && isUserExist.isVerified == false) {
+        console.log("Delete user")
         await User.findByIdAndDelete(isUserExist._id);
       }
+
+      console.log("Is user exist", isUserExist);
 
       if(isUserExist && isUserExist.isVerified == true){
         throw new Error("User already exist please login !");
@@ -34,6 +38,7 @@ authRouter.post("/signup", async (req, res) => {
         otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
+      console.log("saved user instace in db", savedUser);
       
       // send otp mail
       const info = await sendOTP(emailId, otp);
@@ -46,9 +51,7 @@ authRouter.post("/signup", async (req, res) => {
 
   // login user
 authRouter.post("/login", async (req, res) => {
-
     try{
-      
       const {emailId, password} = req.body;
       const user = await User.findOne({ emailId : emailId });
       if(!user){
@@ -84,6 +87,7 @@ authRouter.post("/logout", async (req, res)=>{
 authRouter.post("/verify-otp", async (req, res)=>{
   try{
     const {emailId, otp} = req.body;
+    console.log("In verify otp method, otp received is ", otp, emailId);
     const user = await User.findOne({emailId});
     if(otp == "") {
       throw new Error ("Please enter the opt!");

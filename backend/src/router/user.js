@@ -10,10 +10,11 @@ const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills isPr
 userRouter.get("/user/requests/received", userAuth, async (req, res)=>{
     try{
         const loggedInUser = req.user;
-        const connectionRequests = await ConnectionRequest.find({
+        const connectionRequests = await ConnectionRequest.find({ 
             toUserId: loggedInUser._id,
             status:"interested"
         }).populate("fromUserId", ["firstName", "lastName", "photoUrl", "age", "gender", "about", "skills"]);
+        // console.log(connectionRequests);
         // here we use "fromUserId" reference to fetch the info of "User" Model  using "populate"
 
         res.status(200).json({
@@ -92,7 +93,6 @@ userRouter.get("/feed", userAuth, async (req, res)=>{
 });
 
 // searching
-
 userRouter.post("/user/search", userAuth, async (req, res) => {
   try {
     const { searchedSkill } = req.body;
@@ -138,7 +138,6 @@ userRouter.post("/user/search", userAuth, async (req, res) => {
 
 
 // View Connection 
-
 userRouter.get("/connection/:id", userAuth, async (req, res) =>{
     const { id } = req.params;
     try{

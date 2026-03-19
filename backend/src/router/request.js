@@ -84,7 +84,6 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, r
 })
 
 //  remove connection. 
-
 requestRouter.delete("/request/remove/:id", userAuth, async (req, res) => {
     try{
         const { id } = req.params;

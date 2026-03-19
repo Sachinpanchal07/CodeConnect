@@ -28,7 +28,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res)=>{
     if(!isEditAllowed){
       throw new Error("edit not allowed !!");
     }
-    Object.keys(req.body).forEach((key)=>loggedInUser[key] = req.body[key]);
+    Object.keys(req.body).forEach((key)=>loggedInUser[key] = req.body[key]); // editing
     
     await loggedInUser.save();
     res.json({

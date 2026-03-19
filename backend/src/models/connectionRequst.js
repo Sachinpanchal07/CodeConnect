@@ -30,7 +30,7 @@ connectionRequestSchema.pre("save", function (next){
     const connectionRequest  = this; // referes to current document to be saved
     // check if fromUserId is same as toUserId.
     if(connectionRequest.fromUserId.equals(this.toUserId)){
-        throw new Error("Cannot send connectiono request to yourself!");
+        throw new Error("Cannot send connection request to yourself!");
     }
     next();
 })

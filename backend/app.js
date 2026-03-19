@@ -1,5 +1,4 @@
-// console.log(process.env)
-require('dotenv').config()
+require('dotenv').config();
 const express = require("express");
 const {connectDB} = require("./src/config/database");
 const app = express();
@@ -31,12 +30,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // use router
-app.use("/", authRouter)
-app.use("/", profileRouter)
-app.use("/", requestRouter)
-app.use("/", userRouter)
-app.use("/", paymentRouter)
-app.use("/", chatRouter)
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
+app.use("/", userRouter);
+app.use("/", paymentRouter);
+app.use("/", chatRouter);
 
 const port = process.env.PORT || 3000;
 

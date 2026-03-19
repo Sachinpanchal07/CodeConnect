@@ -11,7 +11,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
 const sendMailToUser = async (email) => {
     const mailOptions = {
         from : "codeconnect.application@gmail.com",
@@ -19,7 +18,6 @@ const sendMailToUser = async (email) => {
         subject : "CodeConnect connection requests",
         text : "Dear User You have received a new connection request. Please log in to your account to accept or reject the request at your convenience."
     }
-
     try{
         const info = await transporter.sendMail(mailOptions);
         return info
