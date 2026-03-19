@@ -66,7 +66,12 @@ authRouter.post("/login", async (req, res) => {
       }
       if(user){
         const token = user.getJWT();
-        res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)}); 
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== "development",
+          sameSite: "none",
+          expires: new Date(Date.now() + 8 * 3600000),
+        });
         res.send(user);
       }
       else{
@@ -79,7 +84,12 @@ authRouter.post("/login", async (req, res) => {
 
 // logout
 authRouter.post("/logout", async (req, res)=>{
-  res.cookie("token", null, {expires:new Date(Date.now())});
+  res.cookie("token", null, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "none",
+    expires: new Date(Date.now()),
+  });
   res.send("logout successfully");
 })
 
@@ -109,7 +119,12 @@ authRouter.post("/verify-otp", async (req, res)=>{
 
     // generate token after user verified
     const token = user.getJWT();
-    res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)});
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "none",
+      expires: new Date(Date.now() + 8 * 3600000),
+    });
 
     res.status(200).json({message:"Email verified successfully!", data:savedUser}); 
   }catch(err){
