@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
@@ -58,11 +58,12 @@ const Login = () => {
       );
 
       const user = res.data.data;
+      console.log("user from server", user);
       if (user.isVerified) {
         dispatch(addUser(res.data.data));
         return navigate("/profile");
       } else {
-        // console.log("i'm in login page with navigate")
+        console.log("i'm in login page with navigate")
         navigate("/verify-otp", { state: { emailId } });
       }
     } catch (err) {
@@ -122,7 +123,7 @@ const Login = () => {
 
             <div className="mb-4">
               <label className="block font-medium">Email</label>
-              <input
+              <input 
                 placeholder="Enter gmail address"
                 type="email"
                 value={emailId}

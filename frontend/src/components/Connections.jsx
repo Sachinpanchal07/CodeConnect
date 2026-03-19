@@ -34,8 +34,7 @@ const Connections = () => {
   //   console.log(connections);
   // },[connections])
 
-  if (!connections) return;
-  if (connections.length === 0) {
+  if (!connections || connections.length === 0) {
     return (
       <>
         {loading ? (

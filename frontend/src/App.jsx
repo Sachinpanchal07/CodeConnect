@@ -24,16 +24,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
 
           <Route path="/" element={<Body></Body>}>
             <Route path="/feed" element={<Feed></Feed>}></Route>
-            <Route path="/login" element={<Login></Login>}></Route> 
             <Route path="/profile" element={<Profile></Profile>}></Route> 
             <Route path="/connections" element={<Connections></Connections>}></Route> 
             <Route path="/view/connection/:connectionId" element={<ViewConnection></ViewConnection>}></Route>
             <Route path="/requests" element={<Requests></Requests>}></Route> 
             <Route path="/search" element={<SearchUsers></SearchUsers>}></Route>
-            <Route path="/verify-otp" element={<OtpVerify></OtpVerify>}></Route>
             <Route path="/premium" element={<Premium></Premium>}></Route>
             <Route path="/chat/:targetUserId" element={<Chat></Chat>}></Route>
           </Route>

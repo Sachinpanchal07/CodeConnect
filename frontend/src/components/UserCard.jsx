@@ -78,7 +78,6 @@ const UserCard = ({ user }) => {
 
           <p className="text-sm mb-4 leading-relaxed">{about}</p>
 
-          {/* Buttons */}
           <div className="flex justify-between">
             <button
               className="px-4 py-1 rounded-md cursor-pointer border border-red-400 text-red-400 transition-transform hover:scale-105 duration-300"

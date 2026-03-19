@@ -51,7 +51,7 @@ const Chat = () => {
   const handleSendMessage = () => {
     const socket = createSocketConnection();
 
-    // send message to server when click send button by emitting the even "sendMessage".
+    // send message to server when click send button by emitting the event "sendMessage".
     // TODOs: check if userId and targetUserId are friends
 
     socket.emit("sendMessage", {

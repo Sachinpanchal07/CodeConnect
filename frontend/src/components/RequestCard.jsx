@@ -39,7 +39,7 @@ const RequestCard = ({ request, reviewRequest, requestId }) => {
 
             <div className="mt-3">
               <div className="text-sm text-gray-300">
-                <span>{age},</span> <span>{gender}</span>
+                <span>{age}</span> <span>{gender}</span>
               </div>
               <h2 className="text-sm text-gray-300 py-1 font-semibold">
                 {skills.join(" | ")}

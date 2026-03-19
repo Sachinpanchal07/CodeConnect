@@ -113,8 +113,6 @@ const SearchUserCard = ({ user }) => {
           >
             <i className='bx bx-minus font-bold text-xl sm:text-2xl'></i>
           </button>
-          
-          
         </div>
       </div>
       <div className="border border-gray-600"></div>

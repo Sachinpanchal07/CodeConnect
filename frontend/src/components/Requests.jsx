@@ -51,8 +51,8 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests) return;
-  if (requests.length === 0) {
+  // if (!requests) return;
+  if (!requests || requests.length === 0) {
     return (
       <p className="py-60 text-white text-center text-xl md:text-2xl">
         No Connections Requests Found !!
