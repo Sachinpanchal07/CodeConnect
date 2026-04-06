@@ -42,16 +42,12 @@ const ViewConnection = () => {
       const isConfirm = confirm("Are you sure to remove connection");
       // console.log("before removed", allRequests)
       if (isConfirm) {
-        // console.log("all req", allRequests);
-        // console.log("user", user);
-        // console.log("loggedinUser id", loggedInUser._id);
-        // console.log("connection id", user?._id);
         const reqIdArray = allRequests.filter(
           (req) =>
             (req.fromUserId == user?._id && req.toUserId == loggedInUser._id) ||
             (req.toUserId == user?._id && req.fromUserId == loggedInUser._id)
         );
-        console.log("array of reqidarr ", reqIdArray);
+        // console.log("array of reqidarr ", reqIdArray);
         const reqId = reqIdArray[0]._id;
         await axios.delete(BASE_URL + "/request/remove/" + reqId, {
           withCredentials: true,

@@ -26,14 +26,14 @@ const connectionRequestSchema = new mongoose.Schema({
 }
 );
 
-connectionRequestSchema.pre("save", function (next){
-    const connectionRequest  = this; // referes to current document to be saved
-    // check if fromUserId is same as toUserId.
-    if(connectionRequest.fromUserId.equals(this.toUserId)){
-        throw new Error("Cannot send connection request to yourself!");
-    }
-    next();
-})
+// connectionRequestSchema.pre("save", function (next){
+//     const connectionRequest  = this; // referes to current document to be saved
+//     // check if fromUserId is same as toUserId.
+//     if(connectionRequest.fromUserId.equals(this.toUserId)){
+//         throw new Error("Cannot send connection request to yourself!");
+//     }
+//     next();
+// })
 
 // creating compound index
 connectionRequestSchema.index({ firstName: 1, lastName: 1 })

@@ -10,15 +10,15 @@ const sendOTP = require("../utils/nodemailer.js");
 authRouter.post("/signup", async (req, res) => {
     try{
       const{firstName, lastName, emailId, password} = req.body;
-      console.log("Req.body in signup api", req.body);
+      // console.log("Req.body in signup api", req.body);
 
       const isUserExist = await User.findOne({emailId});
       if(isUserExist && isUserExist.isVerified == false) {
-        console.log("Delete user")
+        // console.log("Delete user")
         await User.findByIdAndDelete(isUserExist._id);
       }
 
-      console.log("Is user exist", isUserExist);
+      // console.log("Is user exist", isUserExist);
 
       if(isUserExist && isUserExist.isVerified == true){
         throw new Error("User already exist please login !");
@@ -38,7 +38,7 @@ authRouter.post("/signup", async (req, res) => {
         otpExpiry: Date.now() + 5 * 60 * 1000,
       }); // creating user instance
       const savedUser = await userInstance.save();
-      console.log("saved user instace in db", savedUser);
+      // console.log("saved user instace in db", savedUser);
       
       // send otp mail
       const info = await sendOTP(emailId, otp);
@@ -66,12 +66,7 @@ authRouter.post("/login", async (req, res) => {
       }
       if(user){
         const token = user.getJWT();
-        res.cookie("token", token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV !== "development",
-          sameSite: "none",
-          expires: new Date(Date.now() + 8 * 3600000),
-        });
+        res.cookie("token", token, {httpOnly:true, expires: new Date(Date.now() + 8 * 3600000)}); 
         res.send(user);
       }
       else{
@@ -84,12 +79,7 @@ authRouter.post("/login", async (req, res) => {
 
 // logout
 authRouter.post("/logout", async (req, res)=>{
-  res.cookie("token", null, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "none",
-    expires: new Date(Date.now()),
-  });
+  res.cookie("token", null, {expires:new Date(Date.now())});
   res.send("logout successfully");
 })
 
@@ -97,7 +87,7 @@ authRouter.post("/logout", async (req, res)=>{
 authRouter.post("/verify-otp", async (req, res)=>{
   try{
     const {emailId, otp} = req.body;
-    console.log("In verify otp method, otp received is ", otp, emailId);
+    // console.log("In verify otp method, otp received is ", otp, emailId);
     const user = await User.findOne({emailId});
     if(otp == "") {
       throw new Error ("Please enter the opt!");
@@ -119,12 +109,7 @@ authRouter.post("/verify-otp", async (req, res)=>{
 
     // generate token after user verified
     const token = user.getJWT();
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "none",
-      expires: new Date(Date.now() + 8 * 3600000),
-    });
+    res.cookie("token", token, {expires: new Date(Date.now() + 8 * 3600000)});
 
     res.status(200).json({message:"Email verified successfully!", data:savedUser}); 
   }catch(err){

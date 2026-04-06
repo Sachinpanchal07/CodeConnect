@@ -11,7 +11,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         const toUserId = req.params.toUserId;
         const fromUserId = req.user._id;
         const status = req.params.status;
-    
+        
         // API level validations
         const allowedStatus = ["interested", "ignored"];
         const toUser = await User.findById(toUserId);
@@ -31,15 +31,16 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         if(existingConnectionRequest){
             return res.status(400).json({message:"User already exist"})
         }
-
+        
         // save in db
         const data = new ConnectionRequest({
             fromUserId,
             toUserId,
             status
         });
-
+        
         await data.save();
+        // console.log("after save  call ", toUserId, fromUserId, status, data);
         return res.json({
             message:req.user.firstName + " " + status + " " + toUser.firstName,
             data

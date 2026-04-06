@@ -17,7 +17,7 @@ function OtpVerify() {
   const navigate = useNavigate();
 
   const emailId = location.state?.emailId;
-  console.log("Passed emailid is ", emailId);
+  // console.log("Passed emailid is ", emailId);
 
   // useEffect(() => {
   //   if (!emailId) {
@@ -31,7 +31,7 @@ function OtpVerify() {
     try {
       setLoading(true);
       if (otp == "") {
-        console.log("In if block of otp verify");
+        // console.log("In if block of otp verify");
         throw new Error("Please enter valid OTP!");
       }
       const res = await axios.post(
@@ -39,7 +39,7 @@ function OtpVerify() {
         { emailId, otp },
         { withCredentials: true },
       );
-      console.log("otp verify response ", res);
+      // console.log("otp verify response ", res);
       dispatch(addUser(res.data.data));
       toast.success("OTP verified successfully!");
       navigate("/profile");
