@@ -30,37 +30,48 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  // useEffect(()=>{
-  //   console.log(connections);
-  // },[connections])
-
   if (!connections || connections.length === 0) {
     return (
-      <>
+      <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4">
         {loading ? (
-          <BeatLoader className="min-h-screen pt-50 text-center" />
+          <BeatLoader color="#3b82f6" />
         ) : (
-          <h1 className="pt-50 text-gray-300 sm:text-xl md:text-2xl  flex justify-center min-h-screen">
-            No Connections found !!
-          </h1>
+          <div className="text-center p-10 border border-gray-800 rounded-3xl bg-gray-900/50 backdrop-blur-md">
+            <h1 className="text-gray-400 text-xl font-medium tracking-tight">
+              No Connections found !!
+            </h1>
+            <p className="text-gray-600 text-sm mt-2">Start exploring to build your network.</p>
+          </div>
         )}
-      </>
+      </div>
     );
   }
 
   return (
     <>
       {loading ? (
-        <BeatLoader className="min-h-screen pt-50 text-center" />
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+          <BeatLoader color="#3b82f6" />
+        </div>
       ) : (
-        <div className="min-h-screen pt-25">
-          <div className="min-h-[500px] flex flex-col w-full sm:w-2xl bg-gray-800 mx-auto sm:rounded-md p-1">
-            {connections.map((connection, index) => (
-              <ConnectionCard
-                key={index}
-                connection={connection}
-              ></ConnectionCard>
-            ))}
+        <div className="min-h-screen bg-gray-950 pt-28 pb-10 px-4">
+          <div className="max-w-2xl mx-auto">
+            {/* Simple Header */}
+            <div className="mb-8 px-2">
+              <h1 className="text-3xl font-black text-white tracking-tight">My Network</h1>
+              <p className="text-gray-400 text-sm">You have {connections.length} active connections</p>
+            </div>
+
+            {/* Connections List Container */}
+            <div className="bg-gray-900/40 border border-gray-800/60 rounded-3xl overflow-hidden shadow-xl backdrop-blur-sm">
+              <div className="divide-y divide-gray-800/50">
+                {connections.map((connection, index) => (
+                  <div key={index} className="transition-colors hover:bg-gray-800/30">
+                    <ConnectionCard connection={connection} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}

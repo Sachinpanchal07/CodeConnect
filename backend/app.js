@@ -37,12 +37,10 @@ app.use("/", userRouter);
 app.use("/", paymentRouter);
 app.use("/", chatRouter);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 connectDB().then(()=>{
   console.log("database connected successfully");
-  // when db is connected then the app.listen starting accepting the request.
-  // best way to connect to db.
   server.listen(port, () => { 
     console.log("server is listening at port 3000");
   });

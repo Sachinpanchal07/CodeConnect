@@ -5,39 +5,60 @@ const EditProfileCard = ({ user }) => {
   const data = useSelector((store)=>store.user);
   const allSkills = data.skills;
 
-  return (
-    <div className="flex justify-center m-3">
-      <div className="w-80 bg-gray-950/50 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
-        <figure className="rounded-t-xl overflow-hidden p-8 rounded ">
+return (
+    <div className="flex justify-center m-3 animate-in fade-in zoom-in duration-500">
+      <div className="w-80 bg-gray-900/60 backdrop-blur-xl border border-gray-800 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:border-blue-500/30">
+        
+        {/* Photo Section */}
+        <figure className="relative p-4 pb-0">
           <img
-            src={photoUrl}
-            alt="profile photo"
-            className="w-full h-60 object-cover rounded-t-xl"
+            src={photoUrl || "https://via.placeholder.com/150"}
+            alt="profile"
+            className="w-full h-64 object-cover rounded-2xl shadow-inner bg-gray-800"
           />
-        </figure>
-        <div className="p-5">
-          <div className="flex items-center gap-2">
-              <h2 className="text-2xl bg-gradient-to-br from-blue-500 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-bold flex items-center gap-2">
-                {firstName + " " + lastName}
-              </h2>
-                {isPremium && (
-                  <span className="flex items-center justify-center mt-1 w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
-                    ✓
-                  </span>
-                )}
+          {isPremium && (
+            <div className="absolute top-6 right-6 bg-blue-600 text-white p-1.5 rounded-xl shadow-lg border-2 border-gray-900">
+              <i className='bx bxs-badge-check text-lg'></i>
             </div>
-          {age && gender && (
-            <p className="text-gray-300 text-sm mb-2">{age + ", " + gender}</p>
           )}
-          {skills?.length > 0 && (
-            <p className="text-sm font-semibold">
-              {/* Skills: <span className="font-medium ">{skills.join(" | ")}</span> */}
-              {skills.map((skill, index) => (
-                <button key={index} className="text-white italic font-normal bg-gradient-to-r from-blue-500 to-purple-500  m-1 px-2 pb-0.5 rounded-full">{skill}</button>
-              ) )}
+        </figure>
+
+        {/* Content Section */}
+        <div className="p-6">
+          <div className="mb-3">
+            <h2 className="text-2xl font-black text-white tracking-tight leading-tight">
+              {firstName} {lastName}
+            </h2>
+            {age && gender && (
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">
+                {age} Years • {gender}
+              </p>
+            )}
+          </div>
+
+          {/* About Section */}
+          <div className="mb-5">
+            <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+              <span className="text-blue-500 font-bold uppercase text-[9px] block mb-1 tracking-tighter">Bio</span>
+              {about || "Your story starts here..."}
             </p>
-          )}
-          <p className="text-gray-300 text-sm mb-4 leading-relaxed"><span className="font-semibold">About : </span>{about}</p>
+          </div>
+
+          {/* Skills Section */}
+          <div className="flex flex-wrap gap-1.5">
+            {skills?.length > 0 ? (
+              skills.map((skill, index) => (
+                <span 
+                  key={index} 
+                  className="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold rounded-lg uppercase transition-transform hover:scale-105"
+                >
+                  {skill}
+                </span>
+              ))
+            ) : (
+              <span className="text-[10px] text-gray-700 italic">No skills added yet</span>
+            )}
+          </div>
         </div>
       </div>
     </div>

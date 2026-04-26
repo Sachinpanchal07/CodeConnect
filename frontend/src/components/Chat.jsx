@@ -64,16 +64,30 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex w-full h-full sm:px-4 justify-center pt-20 pb-5">
-      <div className="flex flex-col h-[500px] w-[700px] bg-gray-900 text-white sm:rounded-xl shadow-lg overflow-hidden">
-        <div className="bg-gray-800 px-4 py-3 flex items-center justify-between  border-b border-gray-700">
-          <h2 className="font-semibold text-lg">Chat</h2>
-          <span className="text-sm text-gray-400">Online</span>
+    <div className="flex w-full h-screen sm:px-4 justify-center pt-24 pb-8 bg-gray-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/10 via-gray-950 to-gray-950">
+      <div className="flex flex-col h-full max-h-[700px] w-full max-w-3xl bg-gray-900/60 backdrop-blur-xl border border-gray-800 sm:rounded-3xl shadow-2xl overflow-hidden">
+        
+        {/* Chat Header */}
+        <div className="bg-gray-900/80 px-6 py-4 flex items-center justify-between border-b border-gray-800">
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+            <div>
+              <h2 className="font-black text-white tracking-tight">Direct Message</h2>
+              <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">End-to-End Encrypted</p>
+            </div>
+          </div>
+          <button className="text-gray-400 hover:text-white transition-colors">
+            <i className='bx bx-dots-vertical-rounded text-xl'></i>
+          </button>
         </div>
+
+        {/* Message Area */}
         <div
-          className="flex-1 p-4 space-y-3 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700"
+          className="flex-1 p-6 space-y-6 overflow-y-auto scrollbar-hide"
           style={{
-            backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTGngzEmvbo46fJUXFkf4LGQ1AMgMwt9fmQ&s')",
+            backgroundImage: "linear-gradient(rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.95)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTGngzEmvbo46fJUXFkf4LGQ1AMgMwt9fmQ&s')",
+            backgroundSize: '200px',
+            backgroundRepeat: 'repeat'
           }}
         >
           {messages?.map((msg, index) => {
@@ -81,37 +95,48 @@ const Chat = () => {
             return (
               <div
                 key={index}
-                className={"chat " + (isMe ? "chat-end" : "chat-start ")}
+                className={`flex w-full ${isMe ? "justify-end" : "justify-start"} animate-in slide-in-from-bottom-2 duration-300`}
               >
-                <div className="chat-header text-gray-200">{msg.firstName}</div>
-                <div
-                  className={
-                    "chat-bubble " +
-                    (isMe ? "bg-black text-white" : "bg-gray-300")
-                  }
-                >
-                  {msg.text}
+                <div className={`max-w-[80%] flex flex-col ${isMe ? "items-end" : "items-start"}`}>
+                  <span className="text-[10px] font-bold text-gray-500 mb-1 px-1 uppercase tracking-tighter">
+                    {msg.firstName}
+                  </span>
+                  <div
+                    className={`px-4 py-2.5 rounded-2xl text-sm shadow-sm ${
+                      isMe 
+                        ? "bg-blue-600 text-white rounded-tr-none shadow-blue-500/10" 
+                        : "bg-gray-800 text-gray-200 rounded-tl-none border border-gray-700"
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className="bg-gray-800 p-3 border-t border-gray-700 flex items-center gap-2">
-          <input
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            type="text"
-            placeholder="Type a message..."
-            className="flex-1 px-3 py-2 text-sm rounded-full bg-gray-700 border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-          />
-          <button
-            onClick={handleSendMessage}
-            // onKeyDown={handleSendMessage}
-            className="text-center cursor-pointer bg-green-500 hover:bg-green-600 px-3 py-2 rounded-full transition"
-          >
-            <i className="bx bxs-send bs"></i>
-          </button>
+        {/* Input Area */}
+        <div className="bg-gray-900/80 p-4 border-t border-gray-800">
+          <div className="flex items-center gap-3 bg-gray-800/50 p-2 rounded-2xl border border-gray-700 focus-within:border-blue-500/50 transition-all">
+            <button className="text-gray-500 hover:text-gray-300 ml-2">
+              <i className='bx bx-plus-circle text-xl'></i>
+            </button>
+            <input
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+              type="text"
+              placeholder="Write a message..."
+              className="flex-1 bg-transparent border-none text-white text-sm focus:outline-none placeholder-gray-600"
+            />
+            <button
+              onClick={handleSendMessage}
+              className="bg-blue-600 hover:bg-blue-500 text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all active:scale-90 shadow-lg shadow-blue-600/20"
+            >
+              <i className="bx bxs-send text-lg"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

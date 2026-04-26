@@ -16,8 +16,8 @@ const Premium = () => {
   // verify is user premium or not.
   const verifyPremiumUser = async () => {
     try{
-        const res = await axios.get(BASE_URL + "/premium/verify", {withCredentials:true});
-        setIsUserVerified(res.data.isVerify);
+        const res = await axios.get(BASE_URL + "/premium/check", {withCredentials:true});
+        setIsUserVerified(res.data.isPremium);
     }catch(err){
       console.log("Error in verifying premium user", err);
     }
@@ -48,14 +48,33 @@ const Premium = () => {
         theme: {
           color: "#F37254",
         },
-        handler: verifyPremiumUser,
+        handler: async (response) => {
+          try {
+            // Verify payment with backend immediately
+            const verifyRes = await axios.post(
+              BASE_URL + "/premium/verify",
+              {
+                paymentId: response.razorpay_payment_id,
+                orderId: response.razorpay_order_id,
+              },
+              { withCredentials: true }
+            );
+
+            toast.success("✨ You are now premium! Enjoy unlimited features!");
+            // Refresh user verification status
+            await verifyPremiumUser();
+          } catch (err) {
+            toast.error("Payment verification failed. Please contact support.");
+            console.log("Payment verification error:", err);
+          }
+        },
       };
 
       // It will open the razorpay dialog box
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (err) {
-      toast.error("Something went wront, Please try again!");
+      toast.error("Something went wrong, Please try again!");
     } finally {
       setLoading(false);
     }

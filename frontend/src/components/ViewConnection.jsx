@@ -77,64 +77,96 @@ const ViewConnection = () => {
   return (
     <>
       {loading ? (
-        <BeatLoader className="pt-50 text-center min-h-screen"></BeatLoader>
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+          <BeatLoader color="#3b82f6" />
+        </div>
       ) : (
-        <div className="min-h-screen pt-25 sm:pt-35 pb-10 px-3 rounded-2xl bg-gray-800 text-white">
-          <div className="min-h-[400px] flex flex-col w-full rounded-2xl sm:w-2xl bg-gray-950/50 mx-auto p-5 sm:p-8 sm:rounded-md">
-            <section className="flex flex-col sm:flex-row gap-12">
-              <figure className="flex-shrink-0 ">
-                <img
-                  src={user?.photoUrl}
-                  alt=""
-                  className="bg-blue-500 h-35 w-35 rounded-full border-2 border-white"
-                />
-              </figure>
-              <div className="">
-                <h2 className="text-2xl font-bold pt- flex items-center gap-2">
-                  {user?.firstName + " " + user?.lastName}
-                  {user?.isPremium && (
-                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-xs font-bold">
-                      ✓
-                    </span>
-                  )}
-                </h2>
+        <div className="min-h-screen bg-gray-950 pt-28 pb-10 px-4 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-blue-900/10 via-gray-950 to-gray-950">
+          <div className="max-w-3xl mx-auto">
+            
+            {/* Back Button */}
+            <button 
+              onClick={() => navigate(-1)} 
+              className="text-gray-500 hover:text-white mb-6 flex items-center gap-2 text-sm transition-colors cursor-pointer"
+            >
+              <i className='bx bx-left-arrow-alt text-xl'></i> Back to Network
+            </button>
 
-                <div className="flex mt-3 gap-4">
-                  <button
-                    className="px-4 py-0.5 text-sm rounded-xl cursor-pointer border border-red-400 text-red-400 transition-transform hover:scale-105 duration-300"
-                    onClick={() => handleRemoveConnection()}
-                  >
-                    Disconnect
-                  </button>
+            {/* Profile Card */}
+            <div className="bg-gray-900/50 border border-gray-800 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl">
+              
+              <div className="h-32 bg-gradient-to-r from-blue-600 to-indigo-900 opacity-20"></div>
 
-                  <Link
-                    to={"/chat/" + user?._id}
-                    className="inline-block text-sm px-4 py-0.5 rounded-xl bg-gray-800 text-gray-200 font-semibold 
-                            border border-gray-600 hover:bg-gray-700 hover:text-white 
-                            transition hover:scale-105 duration-300 shadow-md"
-                  >
-                    Message
-                  </Link>
+              <div className="px-6 py-8 sm:px-12 -mt-16">
+                <section className="flex flex-col md:flex-row items-center md:items-end gap-6 text-center md:text-left">
+                  <figure className="relative">
+                    <img
+                      src={user?.photoUrl}
+                      alt="profile"
+                      className="h-40 w-40 rounded-3xl object-cover border-4 border-gray-900 shadow-2xl bg-gray-800"
+                    />
+                    {user?.isPremium && (
+                      <div className="absolute -top-2 -right-2 bg-blue-500 p-2 rounded-full border-4 border-gray-900">
+                        <i className='bx bxs-badge-check text-white text-xl'></i>
+                      </div>
+                    )}
+                  </figure>
+
+                  <div className="flex-1 pb-2">
+                    <h1 className="text-3xl font-black text-white tracking-tight">
+                      {user?.firstName} {user?.lastName}
+                    </h1>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
+                      <a href="#" className="text-gray-400 hover:text-blue-400 text-sm flex items-center gap-1 transition-colors">
+                        <i className='bx bxl-github text-lg'></i> GitHub
+                      </a>
+                      <a href="#" className="text-gray-400 hover:text-blue-400 text-sm flex items-center gap-1 transition-colors">
+                        <i className='bx bxl-linkedin-square text-lg'></i> LinkedIn
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-3 md:pb-2">
+                    <button
+                      onClick={() => handleRemoveConnection()}
+                      className="px-6 py-2.5 rounded-xl border border-red-500/30 text-red-500 hover:bg-red-500 hover:text-white text-sm font-bold transition-all cursor-pointer"
+                    >
+                      Disconnect
+                    </button>
+                    <Link
+                      to={"/chat/" + user?._id}
+                      className="px-6 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 text-sm font-bold transition-all shadow-lg shadow-blue-600/20 cursor-pointer"
+                    >
+                      Message
+                    </Link>
+                  </div>
+                </section>
+
+                <hr className="my-8 border-gray-800" />
+
+                {/* Bio & Skills */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="md:col-span-2">
+                    <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">About</h3>
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                      {user?.about || "No bio provided."}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">Technical Skills</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {user?.skills?.map((skill, i) => (
+                        <span key={i} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold rounded-lg uppercase">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex gap-2 mt-4">
-                  <a href="#" target="_blank" className="text-blue-500 text-sm">
-                    GitHub
-                  </a>{" "}
-                  {/* <span className="text-gray-500">|</span> */}
-                  <a href="#" target="_blank" className="text-blue-500 text-sm">
-                    LinkedIn
-                  </a>
-                </div>
-
-                <div className="mt-3">
-                  <h2 className="text-sm text-gray-300 py-1 font-semibold">
-                    {user?.skills.join(" | ")}
-                  </h2>
-                  <h2 className="text-sm text-gray-400 py-1 ">{user?.about}</h2>
-                </div>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       )}

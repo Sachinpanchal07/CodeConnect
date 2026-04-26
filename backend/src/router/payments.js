@@ -67,7 +67,7 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
     await payment.save();
 
     // mark user premium.
-    const user = User.findOne({_id : payment.userId})
+    const user = await User.findOne({_id : payment.userId})
     user.isPremium = true;
     await user.save();
 
@@ -86,20 +86,61 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
   }
 });
 
-// verify payment
-paymentRouter.get("/premium/verify", userAuth, async (req, res) => {
+// verify payment and mark user premium (for client-side verification - works in dev/test mode)
+paymentRouter.post("/premium/verify", userAuth, async (req, res) => {
   try {
-    const user = await req.user;
+    const { paymentId, orderId } = req.body;
+    
+    if (!paymentId || !orderId) {
+      return res.status(400).json({ message: "Payment ID and Order ID required" });
+    }
+
+    // Fetch payment details from Razorpay
+    const paymentDetails = await razorpayInstance.payments.fetch(paymentId);
+
+    if (paymentDetails.status === "captured") {
+      // Payment successful - update user as premium
+      const payment = await Payment.findOne({ orderId });
+      
+      if (!payment) {
+        return res.status(404).json({ message: "Payment record not found" });
+      }
+
+      payment.status = "captured";
+      await payment.save();
+
+      // Mark user as premium
+      const user = await User.findById(req.user._id);
+      if (user) {
+        user.isPremium = true;
+        await user.save();
+        return res.status(200).json({ 
+          message: "Payment verified successfully! You are now premium.",
+          isPremium: true,
+          isVerify: true
+        });
+      }
+    }
+
+    res.status(400).json({ message: "Payment not captured", isPremium: false });
+  } catch (err) {
+    console.error("Payment verification error:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// check if user is premium (GET endpoint)
+paymentRouter.get("/premium/check", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
     
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const isVerify = user.isPremium || false; 
-    
     res.status(200).json({ 
       message: "User verification status", 
-      isVerify,
+      isPremium: user.isPremium || false,
     });
     
   } catch (err) {

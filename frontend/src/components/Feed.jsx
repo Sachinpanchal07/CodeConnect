@@ -7,72 +7,82 @@ import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ReactTyped } from "react-typed";
-import { useState } from "react";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
-  // const [showEffect, setShowEffect] = useState(0);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cookie = document.cookie;
 
   const getFeed = async () => {
     try {
-      if (feed.length > 0) {
-        return;
-      }
+      if (feed.length > 0) return;
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
       dispatch(addFeed(res?.data?.data));
-      // console.log(res);
     } catch (err) {
       console.error(err);
       toast.error(err?.message);
     }
   };
 
-  // const arr = ["Connect", "Code", "Collaborate", "Conquer"];
-  // const [idx, setIdx] = useState(0);
-  // useEffect(()=>{
-  //   setInterval(()=>{
-  //       const interval = setIdx(()=> idx % arr.length + 1)
-  //       return ()=>clearInterval(interval)
-  //   }, 1000)
-  // })
-
   useEffect(() => {
     if (cookie) {
       getFeed();
-      return;
-    } else navigate("/login");
+    } else {
+      navigate("/login");
+    }
   }, []);
 
-  if (!feed) return;
+  if (!feed) return null;
+
   if (feed.length === 0) {
     return (
-      <p className="min-h-screen text-xl sm:text-2xl text-center text-gray-300 pt-50">
-        No new users found !
-      </p>
+      <div className="min-h-screen bg-[#0f172a] flex items-center justify-center">
+        <p className="text-xl sm:text-3xl font-light text-gray-500 animate-pulse">
+          No new users found!
+        </p>
+      </div>
     );
   }
 
   return (
     feed && (
-      <div className="min-h-screen nbg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-30">
-        <div className="min-h-screen flex justify-around ">
-          <div className="justity-start bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 bg-clip-text text-transparent text-center text-6xl mt-10 hidden lg:block">
-            
-            <p className="mb-8 font-bold">Connect</p>
-            <p className="mb-8 font-semibold">Code</p>
-            <p className="mb-8 font-bold">Colleborate</p>
-            <p className="mb-8 font-semibold">Conquer</p>
-            
+      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-black pt-20 overflow-hidden">
+        {/* Decorative Background Elements for Depth */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-around gap-10">
+          
+          
+          <div className="hidden lg:flex flex-col items-start justify-center space-y-2 select-none">
+            <h1 className="text-7xl xl:text-8xl font-black tracking-tighter transition-all duration-500 hover:tracking-normal cursor-default">
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent block">Connect.</span>
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent block">Code.</span>
+              <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent block">Collaborate.</span>
+              <span className="bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent block">Conquer.</span>
+            </h1>
+            <div className="pt-4 pl-2 text-gray-400 text-lg font-medium border-l-2 border-blue-500/50">
+              <ReactTyped
+                strings={["Discover your next partner", "Find the best developers"]}
+                typeSpeed={50}
+                backSpeed={30}
+                loop
+              />
+            </div>
           </div>
-          <div className="">
-            <UserCard user={feed[0]}></UserCard>
+
+          {/* Right Card Section*/}
+          <div className="relative z-10 py-10 transition-transform duration-500 hover:scale-[1.02]">
+             
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-purple-500/20 blur-3xl opacity-50"></div>
+            <div className="relative">
+              <UserCard user={feed[0]} />
+            </div>
           </div>
+
         </div>
       </div>
     )

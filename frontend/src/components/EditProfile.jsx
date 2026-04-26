@@ -77,146 +77,120 @@ const EditProfile = ({ user }) => {
     }
   }, []);
 
-  return (
-    <>
-      <div className="pt-4 pb-4 flex flex-col sm:flex-row justify-center mx-auto flex-wrap md:w-3xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-00 md:rounded-2xl hover:border-1 hover:border-blue-400 duration-300 ">
-        <div className="flex justify-center items-center m-3 bg-gray-950/50 rounded-xl">
-          <div className="p-6 rounded-2xl shadow-xl w-86">
-            <h2 className="text-xl font-bold text-gray-300 text-center mb-2">
-              Edit Profile
-            </h2>
-            <form>
-              <div className="mb-2">
-                <label className="block text-gray-300 font-medium">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  value={firstName}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
-                  onChange={(e) => {
-                    setFirstName(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="mb-2">
-                <label className="block text-sm text-gray-300 font-medium">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  value={lastName}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
-                  onChange={(e) => {
-                    setLastName(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="mb-2">
-                <label className="block text-sm text-gray-300 font-medium">
-                  Photo Url
-                </label>
-                <input
-                  type="text"
-                  value={photoUrl}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 "
-                  onChange={(e) => {
-                    setPhotoUrl(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="mb-2">
-                <label className="block text-sm text-gray-300 font-medium">
-                  age
-                </label>
-                <input
-                  type="text"
-                  value={age}
-                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400"
-                  onChange={(e) => {
-                    setAge(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="mb-2">
-                <label
-                  htmlFor="skills"
-                  className="block text-sm text-gray-300 font-medium"
-                >
-                  Skill
-                </label>
-                <select
-                  className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 "
-                  id="skills"
-                  name="skills"
-                  onChange={(e) => setSkills((prev)=>[...prev, e.target.value])}
-                >
-                  <option className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 bg-gray-900" value="">
-                    Select Skill
-                  </option>
-                  {skillData.map((skill, index) => {
-                    return (
-                      <option
-                        className="w-full px-4 py-1 mt-1 border rounded-lg text-gray-400 bg-gray-900"
-                        key={index}
-                        value={skill}
-                      >
-                        {skill}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              <div className="mb-2">
-                <label className="block text-sm text-gray-300 font-medium">
-                  Gender
-                </label>
-                <input
-                  type="text"
-                  value={gender}
-                  className="w-full px-4 py-1 mt-1 border text-gray-400 border-gray-400 rounded-lg "
-                  onChange={(e) => {
-                    setGender(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="mb-2">
-                <label className="block text-sm text-gray-300 font-medium">
-                  About
-                </label>
-                <textarea
-                  type="text"
-                  value={about}
-                  className="w-full px-4 py-1 mt-1 border text-gray-400 border-gray-400  rounded-lg "
-                  onChange={(e) => {
-                    setAbout(e.target.value);
-                  }}
-                />
-              </div>
-              <p className="text-red-400 text-sm m-2">{error}</p>
-
-              <button
-                className="w-full cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-                type="button"
-                onClick={saveProfile}
-              >
-                Save Profile
-              </button>
-            </form>
-          </div>
+return (
+  <div className="min-h-screen bg-gray-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/10 via-gray-950 to-gray-950 pt-28 pb-10 px-4">
+    <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-10 items-start justify-center">
+      
+      {/* Form Container */}
+      <div className="w-full max-w-md bg-gray-900/60 backdrop-blur-xl border border-gray-800 p-8 rounded-3xl shadow-2xl">
+        <div className="mb-6">
+          <h2 className="text-2xl font-black text-white tracking-tight">Edit Profile</h2>
+          <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mt-1">Personalize your developer presence</p>
         </div>
+
+        <form className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">First Name</label>
+              <input
+                type="text"
+                value={firstName}
+                className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">Last Name</label>
+              <input
+                type="text"
+                value={lastName}
+                className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">Photo URL</label>
+            <input
+              type="text"
+              value={photoUrl}
+              className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all"
+              onChange={(e) => setPhotoUrl(e.target.value)}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">Age</label>
+              <input
+                type="number"
+                value={age}
+                className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all"
+                onChange={(e) => setAge(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">Gender</label>
+              <select
+                value={gender}
+                className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all appearance-none"
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option value="" className="bg-gray-900">Select</option>
+                <option value="Male" className="bg-gray-900">Male</option>
+                <option value="Female" className="bg-gray-900">Female</option>
+                <option value="Other" className="bg-gray-900">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">Add Skills</label>
+            <select
+              className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all appearance-none"
+              onChange={(e) => e.target.value && setSkills((prev)=>[...new Set([...prev, e.target.value])])}
+            >
+              <option value="" className="bg-gray-900">Choose a skill...</option>
+              {skillData.map((skill, index) => (
+                <option key={index} value={skill} className="bg-gray-900">{skill}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-400 uppercase mb-1 ml-1">About</label>
+            <textarea
+              rows="3"
+              value={about}
+              className="w-full px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-blue-500/50 transition-all resize-none"
+              onChange={(e) => setAbout(e.target.value)}
+            />
+          </div>
+
+          {error && <p className="text-red-400 text-[10px] font-bold uppercase tracking-tight ml-1">{error}</p>}
+
+          <button
+            className="w-full cursor-pointer bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-95 mt-2"
+            type="button"
+            onClick={saveProfile}
+          >
+            Update Profile
+          </button>
+        </form>
+      </div>
+
+      {/* Preview Section */}
+      <div className="w-full lg:sticky lg:top-28">
+        <p className="text-center text-[10px] font-black text-gray-600 uppercase tracking-widest mb-4">Live Preview</p>
         <EditProfileCard
           user={{ firstName, lastName, photoUrl, age, gender, about, skills, isPremium }}
-        ></EditProfileCard>
+        />
       </div>
-    </>
-  );
+
+    </div>
+  </div>
+);
 };
 
 export default EditProfile;
